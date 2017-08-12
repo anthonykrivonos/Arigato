@@ -11,6 +11,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts as ContactsClass } from '@ionic-native/contacts';
 import { Contacts } from '../classes/contacts';
+import { Parser } from '../classes/parser';
+import { Speech } from '../classes/speech';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 var AppModule = (function () {
@@ -38,6 +40,8 @@ AppModule = __decorate([
             SplashScreen,
             ContactsClass,
             Contacts,
+            Parser,
+            Speech,
             { provide: ErrorHandler, useClass: IonicErrorHandler }
         ]
     })

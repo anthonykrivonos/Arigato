@@ -9,6 +9,8 @@ import { Contacts as ContactsClass, Contact, ContactField, ContactName } from '@
 import { NativeStorage } from '@ionic-native/native-storage';
 
 import { Contacts } from '../classes/contacts';
+import { Parser } from '../classes/parser';
+import { Speech } from '../classes/speech';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -32,6 +34,8 @@ import { HomePage } from '../pages/home/home';
     SplashScreen,
     ContactsClass,
     Contacts,
+    Parser,
+    Speech,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
