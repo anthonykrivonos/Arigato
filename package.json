@@ -8,6 +8,10 @@
         "clean": "ionic-app-scripts clean",
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
+        "run-ios": "ionic cordova emulate ios --livereload --debug --consolelogs",
+        "run-android": "ionic cordova emulate android --livereload --debug --consolelogs",
+        "build-ios": "ionic cordova build ios --debug --consolelogs",
+        "build-android": "ionic cordova build android --debug --consolelogs",
         "ionic:build": "ionic-app-scripts build",
         "ionic:serve": "ionic-app-scripts serve"
     },
