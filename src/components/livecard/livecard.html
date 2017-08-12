@@ -1,4 +1,34 @@
-<!-- Generated template for the LivecardComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card *ngIf="!editing">
+      <ion-item>
+            <ion-avatar item-start>
+                  <img src="{{picture}}"/>
+            </ion-avatar>
+            <h2><span *ngIf="first_name">{{first_name}}</span> <span *ngIf="last_name">{{last_name}}</span> <span *ngIf="middle_initial">{{middle_initial}}</span></h2>
+            <p *ngIf="company">{{company}}</p>
+      </ion-item>
+      <ion-card-content text-left>
+            <h2 *ngIf="phone">{{phone}}</h2>
+            <h3 *ngIf="email">{{email}}</h3>
+            <p *ngIf="notes">{{notes}}</p>
+      </ion-card-content>
+      <ion-row>
+            <ion-col>
+                  <button ion-button icon-left clear small>
+                        <ion-icon name="paper-plane"></ion-icon>
+                        <div>Save</div>
+                  </button>
+            </ion-col>
+            <ion-col>
+                  <button ion-button icon-left clear small>
+                        <ion-icon name="create"></ion-icon>
+                        <div>Edit</div>
+                  </button>
+            </ion-col>
+            <ion-col>
+                  <button ion-button icon-left clear small>
+                        <ion-icon name="remove-circle"></ion-icon>
+                        <div>Delete</div>
+                  </button>
+            </ion-col>
+      </ion-row>
+</ion-card>

@@ -13,6 +13,19 @@ var HomePage = (function () {
     function HomePage(navCtrl) {
         this.navCtrl = navCtrl;
     }
+    HomePage.prototype.ngOnInit = function () {
+        this.resetValues();
+    };
+    HomePage.prototype.resetValues = function () {
+        this.first_name = "First";
+        this.last_name = "Last";
+        this.middle_initial = "M.";
+        this.picture = "";
+        this.company = "Arigato, Inc.";
+        this.email = "me@arigato.com";
+        this.phone = "(000)000-0000";
+        this.notes = "Tap record to create a contact.";
+    };
     return HomePage;
 }());
 HomePage = __decorate([
