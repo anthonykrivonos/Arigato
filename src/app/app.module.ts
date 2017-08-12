@@ -8,10 +8,12 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts as ContactsClass, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { Camera as CameraClass, CameraOptions } from '@ionic-native/camera';
 
 import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
+import { Camera } from '../classes/camera';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -45,6 +47,8 @@ import { LivecardComponent } from '../components/livecard/livecard';
     ContactsClass,
     NativeStorage,
     SpeechRecognition,
+    CameraClass,
+    Camera,
     Contacts,
     Parser,
     Speech,

@@ -26,6 +26,7 @@
         "@angular/http": "4.1.3",
         "@angular/platform-browser": "4.1.3",
         "@angular/platform-browser-dynamic": "4.1.3",
+        "@ionic-native/camera": "^4.1.0",
         "@ionic-native/contacts": "^4.1.0",
         "@ionic-native/core": "3.12.1",
         "@ionic-native/native-storage": "^4.1.0",
@@ -34,6 +35,7 @@
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
         "cordova-ios": "^4.4.0",
+        "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
         "cordova-plugin-console": "^1.0.5",
         "cordova-plugin-contacts": "^2.3.1",
@@ -70,7 +72,11 @@
                 "CONTACTS_USAGE_DESCRIPTION": " "
             },
             "cordova-plugin-nativestorage": {},
-            "cordova-plugin-speechrecognition": {}
+            "cordova-plugin-speechrecognition": {},
+            "cordova-plugin-camera": {
+                "CAMERA_USAGE_DESCRIPTION": " ",
+                "PHOTOLIBRARY_USAGE_DESCRIPTION": " "
+            }
         },
         "platforms": [
             "ios"

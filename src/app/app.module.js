@@ -12,6 +12,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts as ContactsClass } from '@ionic-native/contacts';
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
+import { Camera } from '@ionic-native/camera';
 import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
@@ -50,6 +51,9 @@ AppModule = __decorate([
             SplashScreen,
             ContactsClass,
             NativeStorage,
+            CameraClass,
+            CameraClass,
+            Camera, Camera,
             SpeechRecognition, SpeechRecognition,
             orage, NativeStorage,
             Contacts,

@@ -14,7 +14,6 @@ export class HomePage implements OnInit {
 
       first_name:string;
       last_name:string;
-      middle_initial:string;
       picture:string;
       company:string;
       email:string;
@@ -48,7 +47,6 @@ export class HomePage implements OnInit {
             this.default = false;
             this.first_name = "First";
             this.last_name = "Last";
-            this.middle_initial = "M.";
             this.picture = "";
             this.company = "Arigato, Inc.";
             this.email = "me@arigato.com";
@@ -60,7 +58,6 @@ export class HomePage implements OnInit {
             this.default = true;
             this.first_name = null;
             this.last_name = null;
-            this.middle_initial = null;
             this.picture = null;
             this.company = null;
             this.email = null;

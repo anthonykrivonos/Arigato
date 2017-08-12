@@ -68,73 +68,70 @@ catch ( = function () {
                         var s = {
                             pt: 'Speak into your phone!',
                             language: 'en-US',
-                            var: , if: function (platform, is) {
-                                if (is === void 0) { is = ('android'); }
-                                this., ,
-                                    prompt;
-                                'Speak into your phone!';
-                                this.speechRecognition.startListening(this.platform.is('ios') ? iosOptions : iosOptions, this.platform.is('ios'), androidOptions).subscribe(function (text) {
-                                    text &&  && text;
-                                    text[0] ? text[0] ? xt[0] : 0 : (failure ? ilure ? fi(not, get, first, index., ")}if : null ll: )) (failure) {failure(", Could, not, get, first, index., ")}e();0]t : fai[[ess(                 }, (error) => {)
-                                        :
-                                        :
-                                    );
-                                    if (failure) {
-                                        failure(error);
-                                    }
-                                }, function (error) {
-                                    if (failure) {
-                                        failure(error);
-                                    }
-                                }, nsole.log('error:', onerror));
-                                startListening();
-                                Recognition.this.speech;
-                                stopListening(success, any = null = null, failure, any = null, void {
-                                    this: .speechRecognition.stopListening().then(function () {
-                                        console.log("speech.ts: Speech recognition allowed.");
-                                        if (success)
-                                            success();
-                                    }).catch(function () {
-                                        console.log("speech.ts: Speech recognition not allowed.");
-                                        if (failure)
-                                            failure();
-                                    }), this: .speechRecognition.hasPermission().then(function () {
-                                        console.log("speech.ts: Speech recognition allowed.");
-                                        if (success)
-                                            success();
-                                    }).catch(function () {
-                                        console.log("speech.ts: Speech recognition not allowed.");
-                                        if (failure)
-                                            failure();
-                                    })
-                                }, {}, pio, "  failure:any = nullanysuccess:)ing()stopListen                  }>;; {);
-                            }
+                            language: 'en-US',
+                            language: 'en-US',
+                            this: .speechRecognition.startListening(_this.platform.is('ios') ? iosOptions : androidOptions).subscribe(function (text) {
+                                _this.stext[0] == null ? (failure ? failure("Could not get first index.") : null) : success(text[0]);
+                                text[0] == null ? (failure ? failure("Could not get first index.") : null) : success(text[0]);
+                                (error);
+                            })
                         };
                     });
-                    _this.hasPermission(());
-                    console.log("speech.ts: Speech recognition now allowed.");
-                    if (success)
-                        success();
-                }).catch(function () {
-                    console.log("speech.ts: Speech recognition not allowed.");
-                    if (failure)
-                        failure();
+                    _this.speechRecognition.startListening(_this.platform.is('ios') ? iosOptions : androidOptions).subscribe(function (text) {
+                        text[0] == null ? (failure ? failure("Could not get first index.") : null) : success(text[0]);
+                    }, function (error) {
+                        if (failure) {
+                            failure(error);
+                        }
+                    });
+                    if (failure) {
+                        failure(error);
+                    }
                 })
-            };
-            this.speechRecognition.isRecognitionAvailable().then(function () {
-                console.log("speech.ts: Speech recognition available.");
+            }();
+            {
+                console.log("speech.ts: Speech recognition not allowed.");
+                if (failure)
+                    failure();
+            }
+            ;
+            this.speechRecognition.hasPermission().then(function () {
+                console.log("speech.ts: Speech recognition allowed.");
                 if (success)
                     success();
             }).catch(function () {
-                console.log("speech.ts: Speech recognition not available.");
+                console.log("speech.ts: Speech recognition not allowed.");
                 if (failure)
                     failure();
             });
         }
     };
-    ;
-}) {
-}
+    {
+    }
+    pio;
+    "  failure:any = nullanysuccess:)ing()stopListen                  }>;; {;
+}) { }
+this.hasPermission(());
+console.log("speech.ts: Speech recognition now allowed.");
+if (success)
+    success();
+try { }
+catch ( = function () {
+    console.log("speech.ts: Speech recognition not allowed.");
+    if (failure)
+        failure();
+}) { }
+;
+this.speechRecognition.isRecognitionAvailable().then(function () {
+    console.log("speech.ts: Speech recognition available.");
+    if (success)
+        success();
+}).catch(function () {
+    console.log("speech.ts: Speech recognition not available.");
+    if (failure)
+        failure();
+});
+;
 listen(void {}, void {})();
 listen;
 //# sourceMappingURL=speech.js.map

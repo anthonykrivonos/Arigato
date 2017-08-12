@@ -46,7 +46,7 @@ export class Speech {
                         prompt: 'Speak into your phone!'
                   }
                   this.speechRecognition.startListening(this.platform.is('ios') ? iosOptions : androidOptions).subscribe((text) => {
-                        text && text[0] ? success(text[0]) : (failure ? failure("Could not get first index.") : null);
+                        text[0] == null ? (failure ? failure("Could not get first index.") : null) : success(text[0]);
                   }, (error) => {
                         if (failure) {failure(error)}
                   });

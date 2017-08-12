@@ -18,9 +18,7 @@ export class MyApp {
             platform.ready().then(() => {
                   statusBar.styleDefault();
                   splashScreen.hide();
-                  speech.requestPermission(null, ()=>{
-                        this.platform.exitApp();
-                  });
+                  speech.requestPermission();
             });
       }
 }

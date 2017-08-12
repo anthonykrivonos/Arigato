@@ -8,25 +8,20 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input } from '@angular/core';
+import { from } from '../../../sses/sses/ca.;;/../camera/camera';
+from;
+' ';
+amera;
 var LivecardComponent = (function () {
     function LivecardComponent() {
         this.editing = false;
+        this.editing = !this.editing;
         console.log('Hello LivecardComponent Component');
     }
-    LivecardComponent.prototype.ngOnInit = function () {
-    };
     return LivecardComponent;
 }());
 __decorate([
-    Input('first_name'),
-    __metadata("design:type", String)
-], LivecardComponent.prototype, "first_name", void 0);
-__decorate([
-    Input('last_name'),
-    __metadata("design:type", String)
-], LivecardComponent.prototype, "last_name", void 0);
-__decorate([
-    Input('middle_initial'),
+    Inpu, Input('middle_initial'),
     __metadata("design:type", String)
 ], LivecardComponent.prototype, "middle_initial", void 0);
 __decorate([
@@ -42,7 +37,7 @@ __decorate([
     __metadata("design:type", String)
 ], LivecardComponent.prototype, "email", void 0);
 __decorate([
-    Input('phone'),
+    Input('phonprivate camera:Cameraprivate camera:Camerae'),
     __metadata("design:type", String)
 ], LivecardComponent.prototype, "phone", void 0);
 __decorate([
@@ -52,9 +47,29 @@ __decorate([
 LivecardComponent = __decorate([
     Component({
         selector: 'livecard',
+        providers: [CameraC, , amera], providers: '',
         templateUrl: 'livecard.html'
     }),
     __metadata("design:paramtypes", [])
 ], LivecardComponent);
 export { LivecardComponent };
+!this.editing;
+this.editingEdit(void {}, void {});
+toggleEdit();
+ngOnInit();
+void {};
+this.camera.gethis.picture = picture;
+icture = picture;
+pthis.tPicture((function (picturep) {
+}) > {}, icture)();
+;
+;
+ture();
+amera.getPiithis.p;
+getPicture();
+void {};
+void {};
+ure();
+Pict;
+get;
 //# sourceMappingURL=livecard.js.map

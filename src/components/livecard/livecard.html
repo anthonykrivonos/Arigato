@@ -1,9 +1,9 @@
 <ion-card *ngIf="!editing">
       <ion-item>
-            <ion-avatar item-start>
+            <ion-avatar *ngIf="picture"  item-start large>
                   <img src="{{picture}}"/>
             </ion-avatar>
-            <h2><span *ngIf="first_name">{{first_name}}</span> <span *ngIf="last_name">{{last_name}}</span> <span *ngIf="middle_initial">{{middle_initial}}</span></h2>
+            <h2><span *ngIf="first_name">{{first_name}}</span> <span *ngIf="last_name">{{last_name}}</span></h2>
             <p *ngIf="company">{{company}}</p>
       </ion-item>
       <ion-card-content text-left>
@@ -19,7 +19,7 @@
                   </button>
             </ion-col>
             <ion-col>
-                  <button ion-button icon-left clear small>
+                  <button (tap)="toggleEdit()" ion-button icon-left clear small>
                         <ion-icon name="create"></ion-icon>
                         <div>Edit</div>
                   </button>
@@ -29,6 +29,34 @@
                         <ion-icon name="remove-circle"></ion-icon>
                         <div>Delete</div>
                   </button>
+            </ion-col>
+      </ion-row>
+</ion-card>
+
+<ion-card *ngIf="!editing">
+      <ion-item>
+            <ion-avatar item-start large>
+                  <button *ngIf="picture" (tap)="getPicture()" ion-button clear no-padding><img src="{{picture}}"/></button>
+                  <button *ngIf="!picture" (tap)="getPicture()" ion-button clear no-padding large><ion-icon name="ios-camera" no-padding></ion-icon></button>
+            </ion-avatar>
+            <h2><span *ngIf="first_name">{{first_name}}</span> <span *ngIf="last_name">{{last_name}}</span></h2>
+            <p *ngIf="company">{{company}}</p>
+      </ion-item>
+      <ion-card-content text-left>
+            <h2 *ngIf="phone">{{phone}}</h2>
+            <h3 *ngIf="email">{{email}}</h3>
+            <p *ngIf="notes">{{notes}}</p>
+      </ion-card-content>
+      <ion-row>
+            <ion-col>
+            </ion-col>
+            <ion-col>
+                  <button (tap)="toggleEdit()" ion-button icon-left clear small>
+                        <ion-icon name="checkmark-circle"></ion-icon>
+                        <div>Done</div>
+                  </button>
+            </ion-col>
+            <ion-col>
             </ion-col>
       </ion-row>
 </ion-card>
