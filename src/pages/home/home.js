@@ -8,15 +8,31 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { Speech } from '../../classes/speech';
 var HomePage = (function () {
-    function HomePage(navCtrl) {
-        this.navCtrl = navCtrl;
+    function HomePage(pu, speech, speech, NavController) {
+        if (speech === void 0) { speech = navCtrl; }
+        this.speech = speech;
+        this.speech = speech;
+        this.loading = false;
+        this.loading = false;
+        this.loading = false;
     }
-    HomePage.prototype.ngOnInit = function () {
-        this.resetValues();
+    HomePage.prototype.endSpeech = function () {
+        this.loading = false;
+        this.speech.stopListening();
+    };
+    HomePage.prototype.beginSpeech = function () {
+        var _this = this;
+        this.loading = true;
+        this.speech.listen(function (text) { return _this.text = text; });
+    };
+    HomePage.prototype.endSpeech = function () {
+        this.loading = false;
+        this.speech.stopListening();
     };
     HomePage.prototype.resetValues = function () {
+        this.default = false;
         this.first_name = "First";
         this.last_name = "Last";
         this.middle_initial = "M.";
@@ -26,14 +42,24 @@ var HomePage = (function () {
         this.phone = "(000)000-0000";
         this.notes = "Tap record to create a contact.";
     };
+    HomePage.prototype.nullValues = function () {
+        this.default = true;
+        this.first_name = null;
+        this.last_name = null;
+        this.middle_initial = null;
+        this.picture = null;
+        this.company = null;
+        this.email = null;
+        this.phone = null;
+        this.notes = null;
+    };
     return HomePage;
 }());
 HomePage = __decorate([
     Component({
-        selector: 'page-home',
-        templateUrl: 'home.html'
-    }),
-    __metadata("design:paramtypes", [NavController])
+        SpeechS: SpeechS,
+    }, peech, selector, providers, [], providers, [], 'page-home', templat, eUrl, 'home.html'),
+    __metadata("design:paramtypes", [Object, Speech, Object, Object])
 ], HomePage);
 export { HomePage };
 //# sourceMappingURL=home.js.map

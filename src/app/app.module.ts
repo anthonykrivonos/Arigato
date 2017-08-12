@@ -7,6 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts as ContactsClass, Contact, ContactField, ContactName } from '@ionic-native/contacts';
 import { NativeStorage } from '@ionic-native/native-storage';
+import { SpeechRecognition } from '@ionic-native/speech-recognition';
 
 import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
@@ -42,6 +43,8 @@ import { LivecardComponent } from '../components/livecard/livecard';
     StatusBar,
     SplashScreen,
     ContactsClass,
+    NativeStorage,
+    SpeechRecognition,
     Contacts,
     Parser,
     Speech,

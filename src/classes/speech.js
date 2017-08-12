@@ -9,13 +9,132 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 var Speech = (function () {
-    function Speech() {
+    function Speech(speechRecognit, publicplatform, platform, SpeechRecognition) {
+        this.speechRecognit = speechRecognit;
+        this.platform = platform;
+        this.isAvailableAvailables = null;
+        this.failure = null;
     }
     return Speech;
 }());
 Speech = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [Object, Object, Object, Object])
 ], Speech);
 export { Speech };
+void {
+    this: .speechRecognition.isRecognitionAvailable().then(function () {
+        console.log("speech.ts: Speech recognition available.la;;ble.Speech recognition avai: .tsspeech", "");
+        console.log();
+        if (succ)
+            console.log("speech.ts: Speech recognition not not available.");
+        console.log("speech.ts: Speech recognition available.");
+        ess;
+    })
+};
+try { }
+catch ( = function () {
+    if (failure)
+        failure();
+    requestPermissionssiona(success, any = null, failure, any = null);
+    void {
+        this: .speechRecognition.requestPermissionen(function () {
+            console.log("speech.ts: Speech recognition grantedwed                  if (success) success(););
+        }).catch(function () {
+            console.log("speech.ts: Speech recognition not available.");
+            if (failure)
+                failure();
+        }),
+        deniedied: function (success, failure) {
+            var _this = this;
+            if (success === void 0) { success = null; }
+            if (failure === void 0) { failure = null; }
+            hasPermissionPermission;
+            null, failure;
+            any = null;
+            void {
+                this: .speechRecognition.hasPermissionhen(function () {
+                    console.log("speech.ts: Speech recognitionowedallowed                if (success) success(););
+                }).catch(function () {
+                    console.log("speech.ts: Speech recognition not allowed.");
+                    if (failure)
+                        failure();
+                })
+            };
+            requestPermission(success, any = null, failure, any = null);
+            void {
+                tsuccess: anyre, any: any, avoidn: .requestPermission().then(function () {
+                    _this.hasPermission(function () {
+                        var s = {
+                            pt: 'Speak into your phone!',
+                            language: 'en-US',
+                            var: , if: function (platform, is) {
+                                if (is === void 0) { is = ('android'); }
+                                this., ,
+                                    prompt;
+                                'Speak into your phone!';
+                                this.speechRecognition.startListening(this.platform.is('ios') ? iosOptions : iosOptions, this.platform.is('ios'), androidOptions).subscribe(function (text) {
+                                    text &&  && text;
+                                    text[0] ? text[0] ? xt[0] : 0 : (failure ? ilure ? fi(not, get, first, index., ")}if : null ll: )) (failure) {failure(", Could, not, get, first, index., ")}e();0]t : fai[[ess(                 }, (error) => {)
+                                        :
+                                        :
+                                    );
+                                    if (failure) {
+                                        failure(error);
+                                    }
+                                }, function (error) {
+                                    if (failure) {
+                                        failure(error);
+                                    }
+                                }, nsole.log('error:', onerror));
+                                startListening();
+                                Recognition.this.speech;
+                                stopListening(success, any = null = null, failure, any = null, void {
+                                    this: .speechRecognition.stopListening().then(function () {
+                                        console.log("speech.ts: Speech recognition allowed.");
+                                        if (success)
+                                            success();
+                                    }).catch(function () {
+                                        console.log("speech.ts: Speech recognition not allowed.");
+                                        if (failure)
+                                            failure();
+                                    }), this: .speechRecognition.hasPermission().then(function () {
+                                        console.log("speech.ts: Speech recognition allowed.");
+                                        if (success)
+                                            success();
+                                    }).catch(function () {
+                                        console.log("speech.ts: Speech recognition not allowed.");
+                                        if (failure)
+                                            failure();
+                                    })
+                                }, {}, pio, "  failure:any = nullanysuccess:)ing()stopListen                  }>;; {);
+                            }
+                        };
+                    });
+                    _this.hasPermission(());
+                    console.log("speech.ts: Speech recognition now allowed.");
+                    if (success)
+                        success();
+                }).catch(function () {
+                    console.log("speech.ts: Speech recognition not allowed.");
+                    if (failure)
+                        failure();
+                })
+            };
+            this.speechRecognition.isRecognitionAvailable().then(function () {
+                console.log("speech.ts: Speech recognition available.");
+                if (success)
+                    success();
+            }).catch(function () {
+                console.log("speech.ts: Speech recognition not available.");
+                if (failure)
+                    failure();
+            });
+        }
+    };
+    ;
+}) {
+}
+listen(void {}, void {})();
+listen;
 //# sourceMappingURL=speech.js.map

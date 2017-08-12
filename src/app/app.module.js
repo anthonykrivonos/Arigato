@@ -10,6 +10,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { Contacts as ContactsClass } from '@ionic-native/contacts';
+import { NativeStorage } from '@ionic-native/native-storage';
+import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
@@ -47,6 +49,9 @@ AppModule = __decorate([
             StatusBar,
             SplashScreen,
             ContactsClass,
+            NativeStorage,
+            SpeechRecognition, SpeechRecognition,
+            orage, NativeStorage,
             Contacts,
             Parser,
             Speech,
