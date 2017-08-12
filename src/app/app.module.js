@@ -15,6 +15,10 @@ import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
+import { ArigatobuttonComponent } from '../components/arigatobutton/arigatobutton';
+import { EditablecardComponent } from '../components/editablecard/editablecard';
+import { LivecardComponent } from '../components/livecard/livecard';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -24,7 +28,11 @@ AppModule = __decorate([
     NgModule({
         declarations: [
             MyApp,
-            HomePage
+            HomePage,
+            ListPage,
+            ArigatobuttonComponent,
+            EditablecardComponent,
+            LivecardComponent
         ],
         imports: [
             BrowserModule,

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { ArigatobuttonComponent } from '../../components/arigatobutton/arigatobutton';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'

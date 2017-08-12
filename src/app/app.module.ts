@@ -16,10 +16,18 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ListPage } from '../pages/list/list';
 
+import { ArigatobuttonComponent } from '../components/arigatobutton/arigatobutton';
+import { EditablecardComponent } from '../components/editablecard/editablecard';
+import { LivecardComponent } from '../components/livecard/livecard';
+
 @NgModule({
   declarations: [
     MyApp,
-    HomePage
+    HomePage,
+    ListPage,
+    ArigatobuttonComponent,
+    EditablecardComponent,
+    LivecardComponent
   ],
   imports: [
     BrowserModule,

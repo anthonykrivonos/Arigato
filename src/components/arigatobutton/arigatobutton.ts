@@ -1,21 +1,21 @@
 import { Component } from '@angular/core';
 
 /**
- * Generated class for the ButtonComponent component.
+ * Generated class for the ArigatobuttonComponent component.
  *
  * See https://angular.io/docs/ts/latest/api/core/index/ComponentMetadata-class.html
  * for more info on Angular Components.
  */
 @Component({
-  selector: 'button',
-  templateUrl: 'button.html'
+  selector: 'arigatobutton',
+  templateUrl: 'arigatobutton.html'
 })
-export class ButtonComponent {
+export class ArigatobuttonComponent {
 
   text: string;
 
   constructor() {
-    console.log('Hello ButtonComponent Component');
+    console.log('Hello ArigatobuttonComponent Component');
     this.text = 'Hello World';
   }
 

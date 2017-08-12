@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
-import { ButtonComponent } from './button/button';
 import { LivecardComponent } from './livecard/livecard';
 import { EditablecardComponent } from './editablecard/editablecard';
+import { ArigatobuttonComponent } from './arigatobutton/arigatobutton';
 @NgModule({
-	declarations: [ButtonComponent,
+	declarations: [ArigatobuttonComponent,
     LivecardComponent,
-    EditablecardComponent],
+    EditablecardComponent,
+    ArigatobuttonComponent],
 	imports: [],
-	exports: [ButtonComponent,
+	exports: [ArigatobuttonComponent,
     LivecardComponent,
-    EditablecardComponent]
+    EditablecardComponent,
+    ArigatobuttonComponent]
 })
 export class ComponentsModule {}
