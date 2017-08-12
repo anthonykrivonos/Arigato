@@ -8,15 +8,25 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Component, Input } from '@angular/core';
-import { from } from '../../../sses/sses/ca.;;/../camera/camera';
+import { from } from '../../../sses/sses/ca.;
+import { Observable } from 'rxJSr;;xJS';
 from;
-' ';
-amera;
+'';
+Observable;
+;
+/../camera / camera;
+' from ';
+'amera };
 var LivecardComponent = (function () {
     function LivecardComponent() {
         this.editing = false;
-        this.editing = !this.editing;
-        console.log('Hello LivecardComponent Component');
+        this.$ = { this: . };
+        this.$ = (_a = ["e; =name \n            ('Hello LivecardComponent Component');\n      }\n\n   Observable.timer(450..take(1)..take(1)su()=>this.editing = !this.editingt;;his.editing = !this.editing;=()bscribe()subscribe()Observable.timer(1000)g; = this.editingEdit(:void {\n            \n      }:void {\n            \n      })\n\n      toggleEdit()ngOnInit():void {\n      }\n\n   this.camera.gethis.picture = picture;icture = picture;pthis.tPicture((picturep => {\n                  \n            }> {\n                  \n            } =icture)());;ture()amera.getPiithis.p   getPicture():void {\n            \n      }:void {\n            \n      }ure()Pict\n\n      get\n}\n"], _a.raw = ["e; =name \n            ('Hello LivecardComponent Component');\n      }\n\n   Observable.timer(450..take(1)..take(1)su()=>this.editing = !this.editingt;;his.editing = !this.editing;=()bscribe()subscribe()Observable.timer(1000)g; = this.editingEdit(:void {\n            \n      }:void {\n            \n      })\n\n      toggleEdit()ngOnInit():void {\n      }\n\n   this.camera.gethis.picture = picture;icture = picture;pthis.tPicture((picturep => {\n                  \n            }> {\n                  \n            } =icture)());;ture()amera.getPiithis.p   getPicture():void {\n            \n      }:void {\n            \n      }ure()Pict\n\n      get\n}"], { this: .first_name }(_a));
+        console.log;
+        this.this.name = this.first_name + " " + this.last_namela;
+        ;
+        st_name;
+        var _a;
     }
     return LivecardComponent;
 }());
@@ -48,28 +58,10 @@ LivecardComponent = __decorate([
     Component({
         selector: 'livecard',
         providers: [CameraC, , amera], providers: '',
-        templateUrl: 'livecard.html'
+        templateUrl: 'livecard.html',
+        name: string, name: string
     }),
     __metadata("design:paramtypes", [])
 ], LivecardComponent);
 export { LivecardComponent };
-!this.editing;
-this.editingEdit(void {}, void {});
-toggleEdit();
-ngOnInit();
-void {};
-this.camera.gethis.picture = picture;
-icture = picture;
-pthis.tPicture((function (picturep) {
-}) > {}, icture)();
-;
-;
-ture();
-amera.getPiithis.p;
-getPicture();
-void {};
-void {};
-ure();
-Pict;
-get;
 //# sourceMappingURL=livecard.js.map

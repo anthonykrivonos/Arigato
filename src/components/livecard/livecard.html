@@ -3,7 +3,7 @@
             <ion-avatar *ngIf="picture"  item-start large>
                   <img src="{{picture}}"/>
             </ion-avatar>
-            <h2><span *ngIf="first_name">{{first_name}}</span> <span *ngIf="last_name">{{last_name}}</span></h2>
+            <h2 *ngIf="name">{{name}}</h2>
             <p *ngIf="company">{{company}}</p>
       </ion-item>
       <ion-card-content text-left>
@@ -33,20 +33,33 @@
       </ion-row>
 </ion-card>
 
-<ion-card *ngIf="!editing">
-      <ion-item>
-            <ion-avatar item-start large>
+<ion-card *ngIf="editing">
+      <ion-item text-center>
+            <ion-avatar large>
                   <button *ngIf="picture" (tap)="getPicture()" ion-button clear no-padding><img src="{{picture}}"/></button>
                   <button *ngIf="!picture" (tap)="getPicture()" ion-button clear no-padding large><ion-icon name="ios-camera" no-padding></ion-icon></button>
             </ion-avatar>
-            <h2><span *ngIf="first_name">{{first_name}}</span> <span *ngIf="last_name">{{last_name}}</span></h2>
-            <p *ngIf="company">{{company}}</p>
       </ion-item>
-      <ion-card-content text-left>
-            <h2 *ngIf="phone">{{phone}}</h2>
-            <h3 *ngIf="email">{{email}}</h3>
-            <p *ngIf="notes">{{notes}}</p>
-      </ion-card-content>
+      <ion-item>
+            <ion-label color="primary" stacked>Full Name</ion-label>
+            <ion-input type="text" [value]="name" placeholder="Full Name" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Company</ion-label>
+            <ion-input type="text" [value]="company" placeholder="Company" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Phone</ion-label>
+            <ion-input type="tel" [value]="phone" placeholder="Phone" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Email</ion-label>
+            <ion-input type="email" [value]="email" placeholder="Email" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Notes</ion-label>
+            <ion-textarea type="text" [value]="notes" placeholder="Notes" clearInput></ion-textarea>
+      </ion-item>
       <ion-row>
             <ion-col>
             </ion-col>

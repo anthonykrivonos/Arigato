@@ -1,4 +1,4 @@
-<ion-content no-padding text-center>
+<ion-content fullscreen no-padding text-center>
       <livecard
             [first_name] = "first_name"
             [last_name] = "last_name"
@@ -16,13 +16,15 @@
                   {{text}}
             </ion-card-content>
       </ion-card>
+      <div class="padding"></div>
 </ion-content>
 <ion-footer padding text-center no-border>
-      <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
-      <ion-toolbar>
-            <ion-title><arigatobutton text-center (touchstart)="beginSpeech()" (touchend)="endSpeech()"></arigatobutton></ion-title>
+      <ion-toolbar transparent>
+            <ion-title *ngIf="isAndroid"><arigatobutton text-center (tap)="beginSpeech()"></arigatobutton></ion-title>
+            <ion-title *ngIf="!isAndroid"><arigatobutton text-center (touchstart)="beginSpeech()" (touchend)="endSpeech()"></arigatobutton></ion-title>
             <ion-buttons end>
-                  <button ion-button right><ion-icon name="arrow-forward"></ion-icon></button>
+                  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+                  <button *ngIf="!loading" ion-button right><ion-icon name="arrow-forward"></ion-icon></button>
             </ion-buttons>
       </ion-toolbar>
 </ion-footer>

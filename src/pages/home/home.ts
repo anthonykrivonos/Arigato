@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, Platform } from 'ionic-angular';
 
 import { Speech } from '../../classes/speech';
 
@@ -21,16 +21,18 @@ export class HomePage implements OnInit {
       notes:string;
 
       default:boolean;
+      isAndroid:boolean;
       loading:boolean = false;
 
-      text: string;
+      text:string;
 
-      constructor(public navCtrl: NavController, private speech:Speech) {
+      constructor(public navCtrl: NavController, private speech:Speech, private plt:Platform) {
 
       }
 
       ngOnInit():void {
             this.resetValues();
+            this.isAndroid = this.plt.is('ios') ? false : true;
       }
 
       beginSpeech():void {

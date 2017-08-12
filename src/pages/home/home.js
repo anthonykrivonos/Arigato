@@ -6,7 +6,7 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 var _this = this;
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, } from 'ionic-angular';
 import { Speech } from '../../classes/speech';
 var HomePage = (function () {
     function HomePage() {
@@ -26,14 +26,23 @@ email: string;
 phone: string;
 notes: string;
 boolean;
+oid: boolean;
+isAndroid: boolean;
 loading: boolean = false;
-loading: boolean = false;
+loadi: bool;
+loadi: bool;
+loadi: boole;
 text: string;
 false;
-constructor(pu, private, speech, Speech, private, speech, Speechblic, navCtrl, NavController);
+constructor(pu, , private, plt, Platform, plt, Platformrivate, pprivate, speech, Speech, private, speech, Speechblic, navCtrl, NavController);
 {
 }
-endSpeech();
+isAndroiddhis.plt.is('ios') ? 'iosfalseandtrue : an? ' : ios;
+' (';
+ios;
+')t.isthis.pla= orme;
+this.plato;
+this.platondSpeech();
 void {
     this: .loading = false,
     this: .speech.stopListening()

@@ -1,3 +1,16 @@
 page-home {
-
+      ion-content {
+            background: snow !important;
+            position: absolute !important;
+            height: 100vh !important;
+      }
+      ion-footer {
+            position: absolute !important;
+            z-index: 2 !important;
+            height: 12vh !important;
+            bottom: 0 !important;
+            &, .toolbar, .toolbar-background {
+                  background: none !important;
+            }
+      }
 }
