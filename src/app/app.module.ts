@@ -14,6 +14,7 @@ import { Speech } from '../classes/speech';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { ListPage } from '../pages/list/list';
 
 @NgModule({
   declarations: [
