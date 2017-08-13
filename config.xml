@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>MyApp</name>
-    <description>An awesome Ionic/Cordova app.</description>
-    <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.1.254:8100" />
+<widget id="io.ionic.starter" version="0.1.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Arigato</name>
+    <description>Arigato: A speech parser that simplifies contact creation.</description>
+    <author email="hi@ionicframework" href="http://ionicframework.com/">Arigato Team</author>
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -81,6 +81,7 @@
     <allow-navigation href="http://169.254.234.14:8101" />
     <allow-navigation href="http://169.254.234.14:8100" />
     <allow-navigation href="http://169.254.192.31:8100" />
+    <allow-navigation href="http://169.254.54.65:8100" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />

@@ -1,7 +1,7 @@
 {
-    "name": "app",
-    "version": "0.0.1",
-    "author": "Ionic Framework",
+    "name": "Arigato",
+    "version": "0.1.1",
+    "author": "Arigato Inc.",
     "homepage": "http://ionicframework.com/",
     "private": true,
     "scripts": {
@@ -35,6 +35,7 @@
         "@ionic-native/status-bar": "3.12.1",
         "@ionic/storage": "2.0.1",
         "compromise": "^10.7.1",
+        "cordova": "^7.0.1",
         "cordova-ios": "^4.4.0",
         "cordova-plugin-camera": "^2.4.1",
         "cordova-plugin-compat": "^1.1.0",
@@ -61,7 +62,7 @@
         "ionic": "3.7.0",
         "typescript": "2.3.4"
     },
-    "description": "An Ionic project",
+    "description": "Arigato: A speech parser that simplifies contact creation.",
     "cordova": {
         "plugins": {
             "cordova-plugin-console": {},
