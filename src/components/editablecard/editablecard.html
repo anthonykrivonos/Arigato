@@ -1,4 +1,52 @@
-<!-- Generated template for the EditablecardComponent component -->
-<div>
-  {{text}}
-</div>
+<ion-card *ngIf="!editing">
+      <button (tap)="toggleEdit()" ion-item>
+            <ion-avatar *ngIf="picture"  item-start large>
+                  <img src="{{picture}}"/>
+            </ion-avatar>
+            <h2 *ngIf="name">{{name}}</h2>
+            <p *ngIf="company">{{company}}</p>
+      </button>
+</ion-card>
+
+<ion-card *ngIf="editing">
+      <ion-item text-center>
+            <ion-avatar large>
+                  <button *ngIf="picture" (tap)="getPicture()" ion-button clear no-padding><img src="{{picture}}"/></button>
+                  <button *ngIf="!picture" (tap)="getPicture()" ion-button clear no-padding large><ion-icon name="ios-camera" no-padding></ion-icon></button>
+            </ion-avatar>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Full Name</ion-label>
+            <ion-input type="text" [(ngModel)]="name" placeholder="Full Name" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Company</ion-label>
+            <ion-input type="text" [(ngModel)]="company" placeholder="Company" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Phone</ion-label>
+            <ion-input type="tel" [(ngModel)]="phone" placeholder="Phone" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Email</ion-label>
+            <ion-input type="email" [(ngModel)]="email" placeholder="Email" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Notes</ion-label>
+            <ion-textarea type="text" [(ngModel)]="notes" placeholder="Notes" clearInput></ion-textarea>
+      </ion-item>
+      <ion-row>
+            <ion-col>
+                  <button (tap)="save()" ion-button icon-left clear small>
+                        <ion-icon name="paper-plane"></ion-icon>
+                        <div>Save</div>
+                  </button>
+            </ion-col>
+            <ion-col>
+                  <button (tap)="delete()" ion-button icon-left clear small>
+                        <ion-icon name="remove-circle"></ion-icon>
+                        <div>Delete</div>
+                  </button>
+            </ion-col>
+      </ion-row>
+</ion-card>

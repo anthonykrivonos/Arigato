@@ -1,8 +1,14 @@
 page-home {
-      ion-content {
+      ion-slides {
             background: snow !important;
-            position: absolute !important;
-            height: 100vh !important;
+            ion-content {
+                  background: none !important;
+                  position: absolute !important;
+                  height: 100vh !important;
+                  .padding {
+                        height: 8vh !important;
+                  }
+            }
       }
       ion-footer {
             position: absolute !important;

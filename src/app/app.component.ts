@@ -19,6 +19,7 @@ export class MyApp {
                   statusBar.styleDefault();
                   splashScreen.hide();
                   speech.requestPermission();
+                  console.log("app:Fully loaded.");
             });
       }
 }

@@ -13,7 +13,7 @@
       </ion-card-content>
       <ion-row>
             <ion-col>
-                  <button ion-button icon-left clear small>
+                  <button (tap)="save()" ion-button icon-left clear small>
                         <ion-icon name="paper-plane"></ion-icon>
                         <div>Save</div>
                   </button>
@@ -25,7 +25,7 @@
                   </button>
             </ion-col>
             <ion-col>
-                  <button ion-button icon-left clear small>
+                  <button (tap)="delete()" ion-button icon-left clear small>
                         <ion-icon name="remove-circle"></ion-icon>
                         <div>Delete</div>
                   </button>
@@ -42,23 +42,23 @@
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Full Name</ion-label>
-            <ion-input type="text" [value]="name" placeholder="Full Name" clearInput></ion-input>
+            <ion-input type="text" [(ngModel)]="name" placeholder="Full Name" clearInput></ion-input>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Company</ion-label>
-            <ion-input type="text" [value]="company" placeholder="Company" clearInput></ion-input>
+            <ion-input type="text" [(ngModel)]="company" placeholder="Company" clearInput></ion-input>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Phone</ion-label>
-            <ion-input type="tel" [value]="phone" placeholder="Phone" clearInput></ion-input>
+            <ion-input type="tel" [(ngModel)]="phone" placeholder="Phone" clearInput></ion-input>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Email</ion-label>
-            <ion-input type="email" [value]="email" placeholder="Email" clearInput></ion-input>
+            <ion-input type="email" [(ngModel)]="email" placeholder="Email" clearInput></ion-input>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Notes</ion-label>
-            <ion-textarea type="text" [value]="notes" placeholder="Notes" clearInput></ion-textarea>
+            <ion-textarea type="text" [(ngModel)]="notes" placeholder="Notes" clearInput></ion-textarea>
       </ion-item>
       <ion-row>
             <ion-col>

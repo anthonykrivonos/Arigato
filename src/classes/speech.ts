@@ -57,9 +57,9 @@ export class Speech {
             this.speechRecognition.stopListening().then(()=>{
                   console.log("speech.ts: Speech recognition allowed.");
                   if (success) success();
-            }).catch(()=>{
+            }).catch((e)=>{
                   console.log("speech.ts: Speech recognition not allowed.");
-                  if (failure) failure();
+                  if (failure) failure(e);
             });
       }
 }

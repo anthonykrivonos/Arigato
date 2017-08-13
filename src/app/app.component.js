@@ -11,6 +11,9 @@ var MyApp = (function () {
     spe;
     mission(null, function () {
         _this.phe;
+        console.log("app: appFully lo..adedFu;;lly loaded", "");
+        le.log();
+        conso;
         platform;
         is;
         ready;

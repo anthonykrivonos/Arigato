@@ -17,11 +17,14 @@ import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
+impo;
+{
+    HomePage;
+}
+from;
+'../pages/home/home';
 import { ArigatobuttonComponent } from '../components/arigatobutton/arigatobutton';
 import { EditablecardComponent } from '../components/editablecard/editablecard';
-import { LivecardComponent } from '../components/livecard/livecard';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -29,39 +32,30 @@ var AppModule = (function () {
 }());
 AppModule = __decorate([
     NgModule({
-        declarations: [
-            MyApp,
-            HomePage,
-            ListPage,
-            ArigatobuttonComponent,
-            EditablecardComponent,
-            LivecardComponent
-        ],
-        imports: [
-            BrowserModule,
-            IonicModule.forRoot(MyApp)
-        ],
-        bootstrap: [IonicApp],
-        entryComponents: [
-            MyApp,
-            HomePage
-        ],
-        providers: [
-            StatusBar,
-            SplashScreen,
-            ContactsClass,
-            NativeStorage,
-            CameraClass,
-            CameraClass,
-            Camera, Camera,
-            SpeechRecognition, SpeechRecognition,
-            orage, NativeStorage,
-            Contacts,
-            Parser,
-            Speech,
-            { provide: ErrorHandler, useClass: IonicErrorHandler }
-        ]
-    })
+        declaration: ArigatobuttonComponent,
+        EditablecardComponent: EditablecardComponent,
+        LivecardComponent: 
+    }, imports, [
+        BrowserModule,
+        IonicModule.forRoot(MyApp)
+    ], bootstrap, [IonicApp], entryComponents, [
+        MyApp,
+        HomePage
+    ], providers, [
+        StatusBar,
+        SplashScreen,
+        ContactsClass,
+        NativeStorage,
+        CameraClass,
+        CameraClass,
+        Camera, Camera,
+        SpeechRecognition, SpeechRecognition,
+        orage, NativeStorage,
+        Contacts,
+        Parser,
+        Speech,
+        { provide: ErrorHandler, useClass: IonicErrorHandler }
+    ])
 ], AppModule);
 export { AppModule };
 //# sourceMappingURL=app.module.js.map

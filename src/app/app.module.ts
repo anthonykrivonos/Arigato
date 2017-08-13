@@ -14,10 +14,10 @@ import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
 import { Camera } from '../classes/camera';
+import { Global } from '../classes/global';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 
 import { ArigatobuttonComponent } from '../components/arigatobutton/arigatobutton';
 import { EditablecardComponent } from '../components/editablecard/editablecard';
@@ -27,7 +27,6 @@ import { LivecardComponent } from '../components/livecard/livecard';
   declarations: [
     MyApp,
     HomePage,
-    ListPage,
     ArigatobuttonComponent,
     EditablecardComponent,
     LivecardComponent
@@ -52,6 +51,7 @@ import { LivecardComponent } from '../components/livecard/livecard';
     Contacts,
     Parser,
     Speech,
+    Global,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

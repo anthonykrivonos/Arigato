@@ -1,30 +1,58 @@
-<ion-content fullscreen no-padding text-center>
-      <livecard
-            [first_name] = "first_name"
-            [last_name] = "last_name"
-            [picture] = "picture"
-            [company] = "company"
-            [email] = "email"
-            [phone] = "phone"
-            [notes] = "notes"
-      ></livecard>
-      <ion-card text-left>
-            <ion-card-header>
-                  Logger
-            </ion-card-header>
-            <ion-card-content *ngIf="text">
-                  {{text}}
-            </ion-card-content>
-      </ion-card>
-      <div class="padding"></div>
-</ion-content>
+<ion-slides (ionSlideWillChange)="changeSlide()" fullscreen>
+      <ion-slide>
+            <ion-content fullscreen padding-top padding-bottom text-center>
+                  <livecard
+                        [first_name] = "first_name"
+                        [last_name] = "last_name"
+                        [picture] = "picture"
+                        [company] = "company"
+                        [email] = "email"
+                        [phone] = "phone"
+                        [notes] = "notes"
+                  ></livecard>
+                  <ion-card *ngIf="text" text-left>
+                        <ion-card-header>
+                              Logger
+                        </ion-card-header>
+                        <ion-card-content *ngIf="text">
+                              {{text}}
+                        </ion-card-content>
+                  </ion-card>
+                  <div class="padding"></div>
+            </ion-content>
+      </ion-slide>
+      <ion-slide>
+            <ion-content fullscreen padding-top padding-bottom text-center>
+                  <ion-card text-left>
+                        <ion-card-header>
+                              Saved Contacts
+                        </ion-card-header>
+                  </ion-card>
+                  <editablecard *ngFor="let str of stored"
+                        [id] = "str.id"
+                        [first_name] = "str.first_name"
+                        [last_name] = "str.last_name"
+                        [picture] = "str.picture"
+                        [company] = "str.company"
+                        [email] = "str.email"
+                        [phone] = "str.phone"
+                        [notes] = "str.notes"
+                  ></editablecard>
+                  <button (tap)="deleteAll()" ion-button padding outline round color="primary">Delete All Contacts</button>
+                  <div class="padding"></div>
+            </ion-content>
+      </ion-slide>
+</ion-slides>
 <ion-footer padding text-center no-border>
       <ion-toolbar transparent>
-            <ion-title *ngIf="isAndroid"><arigatobutton text-center (tap)="beginSpeech()"></arigatobutton></ion-title>
-            <ion-title *ngIf="!isAndroid"><arigatobutton text-center (touchstart)="beginSpeech()" (touchend)="endSpeech()"></arigatobutton></ion-title>
-            <ion-buttons end>
+            <ion-buttons *ngIf="slide == 1" start>
+                  <button (tap)="slideTo(0)" ion-button left padding><ion-icon name="arrow-back"></ion-icon></button>
+            </ion-buttons>
+            <ion-title *ngIf="isAndroid && slide == 0"><arigatobutton text-center (tap)="beginSpeech()"></arigatobutton></ion-title>
+            <ion-title *ngIf="!isAndroid && slide == 0"><arigatobutton text-center (touchstart)="beginSpeech()" (touchend)="endSpeech()"></arigatobutton></ion-title>
+            <ion-buttons *ngIf="slide == 0" end>
                   <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
-                  <button *ngIf="!loading" ion-button right><ion-icon name="arrow-forward"></ion-icon></button>
+                  <button (tap)="slideTo(1)" *ngIf="!loading" ion-button right padding><ion-icon name="arrow-forward"></ion-icon></button>
             </ion-buttons>
       </ion-toolbar>
 </ion-footer>
