@@ -9,12 +9,16 @@ import { Contacts as ContactsClass, Contact, ContactField, ContactName } from '@
 import { NativeStorage } from '@ionic-native/native-storage';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { Camera as CameraClass, CameraOptions } from '@ionic-native/camera';
+import { Vibration as Vibrate} from '@ionic-native/vibration';
 
 import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
 import { Camera } from '../classes/camera';
 import { Global } from '../classes/global';
+import { Alert } from '../classes/alert';
+import { Vibration } from '../classes/vibration';
+import { Toast } from '../classes/toast';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -48,10 +52,14 @@ import { LivecardComponent } from '../components/livecard/livecard';
     SpeechRecognition,
     CameraClass,
     Camera,
+    Vibrate,
     Contacts,
     Parser,
     Speech,
     Global,
+    Alert,
+    Vibration,
+    Toast,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

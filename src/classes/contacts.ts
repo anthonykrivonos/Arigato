@@ -8,24 +8,28 @@ export class Contacts {
 
       constructor(private contacts:ContactsClass, public nativeStorage:NativeStorage) {}
 
-      storeContact(id:number, contact:any, success:any = null, failure:any = null, idReturn:any = null):void {
+      storeContact(contact:any, success:any = null, failure:any = null, idReturn:any = null):void {
             this.nativeStorage.getItem('contacts').then((contacts) => {
                   console.log("contacts:Got contacts list: " + JSON.stringify(contacts));
-                  if (id == null) {
+                  console.log('contacts:Got id: ' + contact.id);
+                  if (contact.id == null) {
                         var id = contacts ? contacts.length : 0;
                         console.log('contacts:Creating new contact with id ' + id + '.');
                         contact.id = id;
                         contacts.push(contact);
                   } else {
-                        console.log('contacts:Changing contact with id ' + id + '.');
-                        contacts = contacts.forEach((ct)=>{
-                              if (ct.id == id) ct = contact;
-                        });
+                        console.log('contacts:Changing contact with id ' + contact.id + '.');
+                        for (var i = 0; i < contacts.length; i++) {
+                              if (contacts[i].id == contact.id) {
+                                    contacts.splice(i, 1, contact);
+                                    break;
+                              }
+                        }
                   }
                   if (idReturn) idReturn(id);
                   this.storeContacts(contacts, success, failure);
             }).catch(()=>{
-                  contact.id = id ? id : 0;
+                  contact.id = contact.id != null ? contact.id : 0;
                   var contacts = [contact];
                   this.storeContacts(contacts, success, failure);
             });
@@ -64,8 +68,9 @@ export class Contacts {
             });
       }
 
-      createContact(first_name:string, last_name:string, company:string, phone:string, email:string, picture:string, notes:string):any {
+      createContact(id:number, first_name:string, last_name:string, company:string, phone:string, email:string, picture:string, notes:string):any {
             return {
+                  id,
                   first_name,
                   last_name,
                   company,

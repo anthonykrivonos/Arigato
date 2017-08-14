@@ -22,7 +22,7 @@ var Camera = (function () {
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE,
             allowEdit: true,
-            saveToPhotoAlbum: false
+            saveToPhotoAlbum: true
         };
         this.camera.getPicture(options).then(function (link) {
             if (success)

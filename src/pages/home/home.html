@@ -14,7 +14,7 @@
                         <ion-card-header>
                               Logger
                         </ion-card-header>
-                        <ion-card-content *ngIf="text">
+                        <ion-card-content>
                               {{text}}
                         </ion-card-content>
                   </ion-card>
@@ -38,7 +38,7 @@
                         [phone] = "str.phone"
                         [notes] = "str.notes"
                   ></editablecard>
-                  <button (tap)="deleteAll()" ion-button padding outline round color="primary">Delete All Contacts</button>
+                  <button *ngIf="stored?.length > 0" (tap)="deleteAll()" ion-button padding outline round color="primary">Delete All Contacts</button>
                   <div class="padding"></div>
             </ion-content>
       </ion-slide>

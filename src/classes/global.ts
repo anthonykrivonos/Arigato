@@ -17,7 +17,9 @@ export class Global {
 
       logger(option:string, callback:any = null):void {this.event(`logger:${option}`, callback);}
 
-      livecard(option:string, callback:any = null):void {this.event(`logger:${option}`, callback);}
+      editablecard(option:string, callback:any = null):void {this.event(`editablecard:${option}`, callback);}
 
-      slides(option:string, callback:any = null):void {this.event(`logger:${option}`, callback);}
+      livecard(option:string, callback:any = null):void {this.event(`livecard:${option}`, callback);}
+
+      slides(option:string, callback:any = null):void {this.event(`slides:${option}`, callback);}
 }

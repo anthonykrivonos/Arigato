@@ -3,7 +3,7 @@
     <name>Arigato</name>
     <description>Arigato: A speech parser that simplifies contact creation.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Arigato Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://169.254.53.130:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -82,6 +82,7 @@
     <allow-navigation href="http://169.254.234.14:8100" />
     <allow-navigation href="http://169.254.192.31:8100" />
     <allow-navigation href="http://169.254.54.65:8100" />
+    <allow-navigation href="http://169.254.53.130:8100" />
     <engine name="ios" spec="^4.4.0" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
@@ -96,6 +97,7 @@
     <plugin name="cordova-plugin-speechrecognition" spec="^1.1.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
     <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
+    <plugin name="cordova-plugin-vibration" spec="^2.1.5" />
     <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
 </widget>

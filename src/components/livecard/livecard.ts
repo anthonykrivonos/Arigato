@@ -1,20 +1,17 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { Camera } from '../../classes/camera';
 import { Contacts } from '../../classes/contacts';
 import { Global } from '../../classes/global';
-
-import { Observable } from 'rxjs';
+import { Toast } from '../../classes/toast';
+import { Alert } from '../../classes/alert';
 
 @Component({
   selector: 'livecard',
-  providers: [Camera, Contacts, Global],
+  providers: [Camera, Contacts, Global, Toast, Alert],
   templateUrl: 'livecard.html'
 })
-export class LivecardComponent implements OnInit {
-      editing:boolean = false;
-      name:string;
-
+export class LivecardComponent {
       @Input('first_name') first_name:string;
       @Input('last_name') last_name:string;
       @Input('picture') picture:string;
@@ -23,22 +20,7 @@ export class LivecardComponent implements OnInit {
       @Input('phone') phone:string;
       @Input('notes') notes:string;
 
-      constructor(private camera:Camera, private contacts:Contacts, private global:Global) {}
-
-      ngOnInit():void {
-            this.name = `${this.first_name} ${this.last_name}`;
-      }
-
-      toggleEdit():void {
-            this.parseName();
-            this.global.logger(this.editing ? 'hide' : 'show');
-            this.editing = !this.editing;
-      }
-
-      parseName():void {
-            this.first_name = this.name.split(" ")[0] || "";
-            this.last_name = this.name.split(" ")[1] || "";
-      }
+      constructor(private camera:Camera, private contacts:Contacts, private global:Global, public toast:Toast, public alert:Alert) {}
 
       getPicture():void {
             this.camera.getPicture((picture) => {
@@ -47,13 +29,53 @@ export class LivecardComponent implements OnInit {
       }
 
       save():void {
-            var contactObj = this.contacts.createContact(this.first_name, this.last_name, this.company, this.phone, this.email, this.picture, this.notes);
-            this.contacts.storeContact(null, contactObj, () => {
-                  this.global.storage('save');
-            });
+            if (this.validate((errorText) => {
+                  this.toast.showToast(errorText, 'top', 4000);
+            })) {
+                  this.toast.showToast(`Saved ${this.first_name} in storage.`);
+                  var contactObj = this.contacts.createContact(null, this.first_name, this.last_name, this.company, this.phone, this.email, this.picture, this.notes);
+                  this.contacts.storeContact(contactObj, () => {
+                        this.global.storage('save');
+                  });
+            }
       }
 
-      delete():void {
-            this.global.livecard('delete');
+      validate(callback:any = null):boolean {
+            var errors = [], valid = true, errorText;
+            if (this.first_name == null) {
+                  errors.push('first name');
+                  valid = false;
+            };
+            if (this.phone == null || this.email == null) {
+                  errors.push('phone or email');
+                  valid = false;
+            }
+            if (errors.length > 0) {
+                  errorText = 'Cannot create new contact. User must have a ';
+                  errors.forEach((er, i) => {
+                        if (i == 0) errorText += er;
+                        else if (i < errors.length - 1 && errors.length != 2) errorText += ', ' + er ;
+                        else errorText += ' and ' + er + '.';
+                  });
+            }
+            if (errorText && callback) callback(errorText);
+            return valid;
+      }
+
+      resetValues():void {
+            this.first_name = null;
+            this.last_name = null;
+            this.picture = null;
+            this.company = null;
+            this.email = null;
+            this.phone = null;
+            this.notes = null;
+      }
+
+      clear():void {
+            this.alert.showAlert(`Clear contact?`, 'This will reset all contact info.', () => {
+                  this.resetValues();
+                  this.global.livecard('clear');
+            });
       }
 }

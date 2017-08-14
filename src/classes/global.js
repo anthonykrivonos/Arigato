@@ -29,6 +29,18 @@ var Global = (function () {
         if (callback === void 0) { callback = null; }
         this.event("logger:" + option, callback);
     };
+    Global.prototype.editablecard = function (option, callback) {
+        if (callback === void 0) { callback = null; }
+        this.event("editablecard:" + option, callback);
+    };
+    Global.prototype.livecard = function (option, callback) {
+        if (callback === void 0) { callback = null; }
+        this.event("livecard:" + option, callback);
+    };
+    Global.prototype.slides = function (option, callback) {
+        if (callback === void 0) { callback = null; }
+        this.event("slides:" + option, callback);
+    };
     return Global;
 }());
 Global = __decorate([

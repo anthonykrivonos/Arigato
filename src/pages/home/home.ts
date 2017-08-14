@@ -5,6 +5,7 @@ import { Speech } from '../../classes/speech';
 import { Global } from '../../classes/global';
 import { Contacts } from '../../classes/contacts';
 import { Parser } from '../../classes/parser';
+import { Alert } from '../../classes/alert';
 
 import { ArigatobuttonComponent } from '../../components/arigatobutton/arigatobutton';
 
@@ -12,7 +13,7 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-home',
-  providers: [Speech, Global, Contacts, Parser],
+  providers: [Speech, Global, Contacts, Parser, Alert],
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
@@ -37,7 +38,7 @@ export class HomePage implements OnInit {
 
       slide:number = 0;
 
-      constructor(public navCtrl: NavController, private speech:Speech, private plt:Platform, private global:Global, private contacts:Contacts, public parser:Parser) {
+      constructor(public navCtrl: NavController, private speech:Speech, private plt:Platform, private global:Global, private contacts:Contacts, public parser:Parser, public alert:Alert) {
             this.global.logger('hide', () => {
                   this.hideLogger();
             });
@@ -67,6 +68,19 @@ export class HomePage implements OnInit {
 
       changeSlide():void {
             this.slide = this.slides.getActiveIndex();
+            this.handleSlide();
+      }
+
+      handleSlide():void {
+            switch (this.slide) {
+                  case 0:
+                        this.global.editablecard('close');
+                        break;
+                  case 1:
+                        break;
+                  default:
+                        break;
+            }
       }
 
       beginSpeech():void {
@@ -122,24 +136,6 @@ export class HomePage implements OnInit {
 
       resetValues():void {
             this.default = true;
-            this.first_name = "First";
-            this.last_name = "Last";
-            this.picture = "";
-            this.company = "Arigato, Inc.";
-            this.email = "me@arigato.com";
-            this.phone = "(000)000-0000";
-            this.notes = "Tap record to create a contact.";
-      }
-
-      nullValues():void {
-            this.default = true;
-            this.first_name = null;
-            this.last_name = null;
-            this.picture = null;
-            this.company = null;
-            this.email = null;
-            this.phone = null;
-            this.notes = null;
       }
 
       loadContacts(slide:boolean = true):void {
@@ -150,8 +146,10 @@ export class HomePage implements OnInit {
       }
 
       deleteAll():void {
-            this.contacts.unStoreContacts(()=>{
-                  this.stored = [];
+            this.alert.showAlert('Delete all contacts?', 'This cannot be undone.', () => {
+                  this.contacts.unStoreContacts(()=>{
+                        this.stored = [];
+                  });
             });
       }
 }

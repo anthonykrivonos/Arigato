@@ -1,4 +1,4 @@
-<ion-card *ngIf="!editing">
+<!-- <ion-card *ngIf="!editing">
       <ion-item>
             <ion-avatar *ngIf="picture"  item-start large>
                   <img src="{{picture}}"/>
@@ -31,9 +31,8 @@
                   </button>
             </ion-col>
       </ion-row>
-</ion-card>
-
-<ion-card *ngIf="editing">
+</ion-card> -->
+<ion-card>
       <ion-item text-center>
             <ion-avatar large>
                   <button *ngIf="picture" (tap)="getPicture()" ion-button clear no-padding><img src="{{picture}}"/></button>
@@ -41,8 +40,12 @@
             </ion-avatar>
       </ion-item>
       <ion-item>
-            <ion-label color="primary" stacked>Full Name</ion-label>
-            <ion-input type="text" [(ngModel)]="name" placeholder="Full Name" clearInput></ion-input>
+            <ion-label color="primary" stacked>First Name</ion-label>
+            <ion-input type="text" [(ngModel)]="first_name" placeholder="First" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Last Name</ion-label>
+            <ion-input type="text" [(ngModel)]="last_name" placeholder="Last" clearInput></ion-input>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Company</ion-label>
@@ -62,14 +65,16 @@
       </ion-item>
       <ion-row>
             <ion-col>
-            </ion-col>
-            <ion-col>
-                  <button (tap)="toggleEdit()" ion-button icon-left clear small>
-                        <ion-icon name="checkmark-circle"></ion-icon>
-                        <div>Done</div>
+                  <button (tap)="save()" ion-button icon-left clear small>
+                        <ion-icon name="paper-plane"></ion-icon>
+                        <div>Save</div>
                   </button>
             </ion-col>
             <ion-col>
+                  <button (tap)="clear()" ion-button icon-left clear small>
+                        <ion-icon name="remove-circle"></ion-icon>
+                        <div>Clear</div>
+                  </button>
             </ion-col>
       </ion-row>
 </ion-card>

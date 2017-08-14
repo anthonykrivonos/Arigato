@@ -1,9 +1,9 @@
 <ion-card *ngIf="!editing">
       <button (tap)="toggleEdit()" ion-item>
-            <ion-avatar *ngIf="picture"  item-start large>
+            <ion-avatar *ngIf="picture" item-start large>
                   <img src="{{picture}}"/>
             </ion-avatar>
-            <h2 *ngIf="name">{{name}}</h2>
+            <h2 *ngIf="first_name">{{first_name}} {{last_name}}</h2>
             <p *ngIf="company">{{company}}</p>
       </button>
 </ion-card>
@@ -16,8 +16,12 @@
             </ion-avatar>
       </ion-item>
       <ion-item>
-            <ion-label color="primary" stacked>Full Name</ion-label>
-            <ion-input type="text" [(ngModel)]="name" placeholder="Full Name" clearInput></ion-input>
+            <ion-label color="primary" stacked>First Name</ion-label>
+            <ion-input type="text" [(ngModel)]="first_name" placeholder="First Name" clearInput></ion-input>
+      </ion-item>
+      <ion-item>
+            <ion-label color="primary" stacked>Last Name</ion-label>
+            <ion-input type="text" [(ngModel)]="last_name" placeholder="Last Name" clearInput></ion-input>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>Company</ion-label>
