@@ -36,6 +36,7 @@ export class LivecardComponent {
                   var contactObj = this.contacts.createContact(null, this.first_name, this.last_name, this.company, this.phone, this.email, this.picture, this.notes);
                   this.contacts.storeContact(contactObj, () => {
                         this.global.storage('save');
+                        this.clear(false);
                   });
             }
       }
@@ -46,7 +47,7 @@ export class LivecardComponent {
                   errors.push('first name');
                   valid = false;
             };
-            if (this.phone == null || this.email == null) {
+            if (this.phone == null && this.email == null) {
                   errors.push('phone or email');
                   valid = false;
             }
@@ -72,10 +73,15 @@ export class LivecardComponent {
             this.notes = null;
       }
 
-      clear():void {
-            this.alert.showAlert(`Clear contact?`, 'This will reset all contact info.', () => {
+      clear(alert:boolean = true):void {
+            if (alert) {
+                  this.alert.showAlert(`Clear contact?`, 'This will reset all contact info.', () => {
+                        this.resetValues();
+                        this.global.livecard('clear');
+                  });
+            } else {
                   this.resetValues();
                   this.global.livecard('clear');
-            });
+            }
       }
 }

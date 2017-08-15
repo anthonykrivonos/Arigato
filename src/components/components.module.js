@@ -8,6 +8,7 @@ import { NgModule } from '@angular/core';
 import { LivecardComponent } from './livecard/livecard';
 import { EditablecardComponent } from './editablecard/editablecard';
 import { ArigatobuttonComponent } from './arigatobutton/arigatobutton';
+import { AvatarComponent } from './avatar/avatar';
 var ComponentsModule = (function () {
     function ComponentsModule() {
     }
@@ -18,12 +19,14 @@ ComponentsModule = __decorate([
         declarations: [ArigatobuttonComponent,
             LivecardComponent,
             EditablecardComponent,
-            ArigatobuttonComponent],
+            ArigatobuttonComponent,
+            AvatarComponent],
         imports: [],
         exports: [ArigatobuttonComponent,
             LivecardComponent,
             EditablecardComponent,
-            ArigatobuttonComponent]
+            ArigatobuttonComponent,
+            AvatarComponent]
     })
 ], ComponentsModule);
 export { ComponentsModule };

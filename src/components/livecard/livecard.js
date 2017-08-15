@@ -36,6 +36,7 @@ var LivecardComponent = (function () {
             var contactObj = this.contacts.createContact(null, this.first_name, this.last_name, this.company, this.phone, this.email, this.picture, this.notes);
             this.contacts.storeContact(contactObj, function () {
                 _this.global.storage('save');
+                _this.clear(false);
             });
         }
     };
@@ -47,7 +48,7 @@ var LivecardComponent = (function () {
             valid = false;
         }
         ;
-        if (this.phone == null || this.email == null) {
+        if (this.phone == null && this.email == null) {
             errors.push('phone or email');
             valid = false;
         }
@@ -75,12 +76,19 @@ var LivecardComponent = (function () {
         this.phone = null;
         this.notes = null;
     };
-    LivecardComponent.prototype.clear = function () {
+    LivecardComponent.prototype.clear = function (alert) {
         var _this = this;
-        this.alert.showAlert("Clear contact?", 'This will reset all contact info.', function () {
-            _this.resetValues();
-            _this.global.livecard('clear');
-        });
+        if (alert === void 0) { alert = true; }
+        if (alert) {
+            this.alert.showAlert("Clear contact?", 'This will reset all contact info.', function () {
+                _this.resetValues();
+                _this.global.livecard('clear');
+            });
+        }
+        else {
+            this.resetValues();
+            this.global.livecard('clear');
+        }
     };
     return LivecardComponent;
 }());

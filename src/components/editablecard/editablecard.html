@@ -1,8 +1,6 @@
 <ion-card *ngIf="!editing">
-      <button (tap)="toggleEdit()" ion-item>
-            <ion-avatar *ngIf="picture" item-start large>
-                  <img src="{{picture}}"/>
-            </ion-avatar>
+      <button (tap)="actionSheet()" ion-item>
+            <avatar [src]="picture" [size]="'small'"></avatar>
             <h2 *ngIf="first_name">{{first_name}} {{last_name}}</h2>
             <p *ngIf="company">{{company}}</p>
       </button>
@@ -10,10 +8,7 @@
 
 <ion-card *ngIf="editing">
       <ion-item text-center>
-            <ion-avatar large>
-                  <button *ngIf="picture" (tap)="getPicture()" ion-button clear no-padding><img src="{{picture}}"/></button>
-                  <button *ngIf="!picture" (tap)="getPicture()" ion-button clear no-padding large><ion-icon name="ios-camera" no-padding></ion-icon></button>
-            </ion-avatar>
+            <avatar [src]="picture" [size]="'large'" (tap)="getPicture()"></avatar>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>First Name</ion-label>

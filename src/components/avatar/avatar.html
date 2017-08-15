@@ -1,0 +1,5 @@
+<button class="large" *ngIf="size=='large'" ion-button clear no-padding>
+      <img *ngIf="src" src="{{src}}"/>
+      <ion-icon *ngIf="!src" name="ios-camera" no-padding></ion-icon>
+</button>
+<img *ngIf="size=='small' && src" src="{{src}}"/>

@@ -1,43 +1,6 @@
-<!-- <ion-card *ngIf="!editing">
-      <ion-item>
-            <ion-avatar *ngIf="picture"  item-start large>
-                  <img src="{{picture}}"/>
-            </ion-avatar>
-            <h2 *ngIf="name">{{name}}</h2>
-            <p *ngIf="company">{{company}}</p>
-      </ion-item>
-      <ion-card-content text-left>
-            <h2 *ngIf="phone">{{phone}}</h2>
-            <h3 *ngIf="email">{{email}}</h3>
-            <p *ngIf="notes">{{notes}}</p>
-      </ion-card-content>
-      <ion-row>
-            <ion-col>
-                  <button (tap)="save()" ion-button icon-left clear small>
-                        <ion-icon name="paper-plane"></ion-icon>
-                        <div>Save</div>
-                  </button>
-            </ion-col>
-            <ion-col>
-                  <button (tap)="toggleEdit()" ion-button icon-left clear small>
-                        <ion-icon name="create"></ion-icon>
-                        <div>Edit</div>
-                  </button>
-            </ion-col>
-            <ion-col>
-                  <button (tap)="delete()" ion-button icon-left clear small>
-                        <ion-icon name="remove-circle"></ion-icon>
-                        <div>Delete</div>
-                  </button>
-            </ion-col>
-      </ion-row>
-</ion-card> -->
 <ion-card>
       <ion-item text-center>
-            <ion-avatar large>
-                  <button *ngIf="picture" (tap)="getPicture()" ion-button clear no-padding><img src="{{picture}}"/></button>
-                  <button *ngIf="!picture" (tap)="getPicture()" ion-button clear no-padding large><ion-icon name="ios-camera" no-padding></ion-icon></button>
-            </ion-avatar>
+            <avatar [src]="picture" [size]="'large'" (tap)="getPicture()"></avatar>
       </ion-item>
       <ion-item>
             <ion-label color="primary" stacked>First Name</ion-label>

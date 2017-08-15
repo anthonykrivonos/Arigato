@@ -1,0 +1,39 @@
+avatar {
+      .large {
+            &, ion-icon, img {
+                  width: 26vw !important;
+                  height: 26vw !important;
+                  border-radius: 50% !important;
+            }
+            ion-icon {
+                  border: solid 1pt color($colors, primary) !important;
+                  font-size: 13vw !important;
+                  padding-top: 6vw !important;
+            }
+            img {
+                  background-repeat: no-repeat !important;
+                  background-clip: content-box !important;
+                  background-position: top !important;
+                  background-size: cover !important;
+                  z-index: 2 !important;
+                  margin: auto !important;
+                  margin-top: 2pt !important;
+            }
+      }
+      .small {
+            img {
+                  background-repeat: no-repeat !important;
+                  background-clip: content-box !important;
+                  background-position: top !important;
+                  background-size: cover !important;
+                  z-index: 2 !important;
+                  margin: auto !important;
+                  margin-top: 2pt !important;
+                  width: 10vw !important;
+                  height: 10vw !important;
+                  border-radius: 50% !important;
+                  float: left !important;
+                  margin-right: 3vw !important;
+            }
+      }
+}

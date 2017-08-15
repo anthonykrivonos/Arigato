@@ -1,4 +1,67 @@
-<ion-slides (ionSlideWillChange)="changeSlide()" fullscreen>
+<ion-slides (ionSlideWillChange)="changeSlide()" initialSlide="1" fullscreen>
+      <ion-slide>
+            <ion-content fullscreen padding-top padding-bottom text-center>
+                  <ion-card>
+                        <ion-list-header>Menu</ion-list-header>
+                  </ion-card>
+                  <ion-card>
+                        <ion-list>
+                              <ion-list-header>Configure</ion-list-header>
+                              <ion-item>
+                                    <ion-label>Vibrate on Alert</ion-label>
+                                    <ion-toggle [(ngModel)]="optionVibrate"></ion-toggle>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>Overwrite on Record</ion-label>
+                                    <ion-toggle [(ngModel)]="optionOverwrite"></ion-toggle>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>Save Avatars to Album</ion-label>
+                                    <ion-toggle [(ngModel)]="optionAvatar"></ion-toggle>
+                              </ion-item>
+                        </ion-list>
+                  </ion-card>
+                  <ion-card>
+                        <ion-list>
+                              <ion-list-header>Destructive</ion-list-header>
+                              <ion-item>
+                                    <ion-label>Clear Contact on Save</ion-label>
+                                    <ion-toggle [(ngModel)]="optionClear"></ion-toggle>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>Delete Contact on Add</ion-label>
+                                    <ion-toggle [(ngModel)]="optionDelete"></ion-toggle>
+                              </ion-item>
+                        </ion-list>
+                  </ion-card>
+                  <ion-card>
+                        <ion-list radio-group>
+                              <ion-list-header>Sort by</ion-list-header>
+                              <ion-item>
+                                    <ion-label>Date Created</ion-label>
+                                    <ion-radio checked="true" value="sortDate"></ion-radio>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>First Name</ion-label>
+                                    <ion-radio value="sortFirstName"></ion-radio>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>Last Name</ion-label>
+                                    <ion-radio value="sortLastName"></ion-radio>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>Phone Number</ion-label>
+                                    <ion-radio value="sortPhone"></ion-radio>
+                              </ion-item>
+                              <ion-item>
+                                    <ion-label>Email Address</ion-label>
+                                    <ion-radio value="sortEmail"></ion-radio>
+                              </ion-item>
+                        </ion-list>
+                  </ion-card>
+                  <ion-label *ngIf="version" color="primary">{{version}}</ion-label>
+            </ion-content>
+      </ion-slide>
       <ion-slide>
             <ion-content fullscreen padding-top padding-bottom text-center>
                   <livecard
@@ -23,10 +86,11 @@
       </ion-slide>
       <ion-slide>
             <ion-content fullscreen padding-top padding-bottom text-center>
-                  <ion-card text-left>
-                        <ion-card-header>
-                              Saved Contacts
-                        </ion-card-header>
+                  <ion-card *ngIf="stored && stored.length > 0">
+                        <ion-list-header>Contacts</ion-list-header>
+                  </ion-card>
+                  <ion-card *ngIf="stored && stored.length == 0">
+                        <ion-list-header><ion-label color="primary">No Created Contacts</ion-label></ion-list-header>
                   </ion-card>
                   <editablecard *ngFor="let str of stored"
                         [id] = "str.id"
@@ -45,14 +109,21 @@
 </ion-slides>
 <ion-footer padding text-center no-border>
       <ion-toolbar transparent>
-            <ion-buttons *ngIf="slide == 1" start>
-                  <button (tap)="slideTo(0)" ion-button left padding><ion-icon name="arrow-back"></ion-icon></button>
+            <ion-buttons *ngIf="slide == LIVE_SLIDE" start>
+                  <button (tap)="slideTo(MENU_SLIDE)" ion-button left padding><ion-icon name="settings"></ion-icon></button>
             </ion-buttons>
-            <ion-title *ngIf="isAndroid && slide == 0"><arigatobutton text-center (tap)="beginSpeech()"></arigatobutton></ion-title>
-            <ion-title *ngIf="!isAndroid && slide == 0"><arigatobutton text-center (touchstart)="beginSpeech()" (touchend)="endSpeech()"></arigatobutton></ion-title>
-            <ion-buttons *ngIf="slide == 0" end>
+            <ion-buttons *ngIf="slide >= EDIT_SLIDE" start>
+                  <button (tap)="slideTo(LIVE_SLIDE)" ion-button left padding><ion-icon name="arrow-back"></ion-icon></button>
+            </ion-buttons>
+            <ion-title *ngIf="isAndroid && slide == LIVE_SLIDE"><arigatobutton text-center (tap)="beginSpeech()"></arigatobutton></ion-title>
+            <ion-title *ngIf="!isAndroid && slide == LIVE_SLIDE"><arigatobutton text-center (touchstart)="beginSpeech()" (touchend)="endSpeech()"></arigatobutton></ion-title>
+            <ion-buttons *ngIf="slide <= MENU_SLIDE" end>
                   <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
-                  <button (tap)="slideTo(1)" *ngIf="!loading" ion-button right padding><ion-icon name="arrow-forward"></ion-icon></button>
+                  <button (tap)="slideTo(LIVE_SLIDE)" ion-button right padding><ion-icon name="arrow-forward"></ion-icon></button>
+            </ion-buttons>
+            <ion-buttons *ngIf="slide == LIVE_SLIDE" end>
+                  <ion-spinner *ngIf="loading" name="crescent"></ion-spinner>
+                  <button (tap)="slideTo(EDIT_SLIDE)" *ngIf="!loading" ion-button right padding><ion-icon name="arrow-forward"></ion-icon></button>
             </ion-buttons>
       </ion-toolbar>
 </ion-footer>

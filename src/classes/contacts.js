@@ -8,7 +8,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { Contacts as ContactsClass } from '@ionic-native/contacts';
+import { Contacts as ContactsClass, ContactField, ContactName, ContactOrganization } from '@ionic-native/contacts';
 import { NativeStorage } from '@ionic-native/native-storage';
 var Contacts = (function () {
     function Contacts(contacts, nativeStorage) {
@@ -80,7 +80,14 @@ var Contacts = (function () {
         if (success === void 0) { success = null; }
         if (failure === void 0) { failure = null; }
         this.nativeStorage.getItem('contacts').then(function (contacts) {
-            contacts = contacts.filter(function (ct) { return ct.id != id; }).forEach(function (ct, i) { return ct.id = i; });
+            for (var i = 0; i < contacts.length; i++) {
+                if (contacts[i].id == id) {
+                    contacts.splice(i, 1);
+                    for (var j = 0; j < contacts.length; j++)
+                        contacts[j].id = j;
+                    break;
+                }
+            }
             _this.storeContacts(contacts, success, failure);
         });
     };
@@ -96,6 +103,24 @@ var Contacts = (function () {
                 failure(e);
             }
         });
+    };
+    Contacts.prototype.saveContact = function (contactObj, success, failure) {
+        if (success === void 0) { success = null; }
+        if (failure === void 0) { failure = null; }
+        var contact = this.contacts.create();
+        contact.name = new ContactName(null, contactObj.last_name, contactObj.first_name);
+        if (contactObj.company)
+            contact.organizations = [new ContactOrganization(null, contactObj.company)];
+        if (contactObj.phone)
+            contact.phoneNumbers = [new ContactField('other', contactObj.phone, true)];
+        if (contactObj.email)
+            contact.emails = [new ContactField('email', contactObj.email, true)];
+        if (contactObj.email)
+            contact.emails = [new ContactField('email', contactObj.email, true)];
+        contact.save().then(function () { if (success)
+            success(); }, function (e) { if (failure)
+            failure(e); }).catch(function (e) { if (failure)
+            failure(e); });
     };
     Contacts.prototype.createContact = function (id, first_name, last_name, company, phone, email, picture, notes) {
         return {

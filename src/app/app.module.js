@@ -14,6 +14,10 @@ import { NativeStorage } from '@ionic-native/native-storage';
 import { SpeechRecognition } from '@ionic-native/speech-recognition';
 import { Camera as CameraClass } from '@ionic-native/camera';
 import { Vibration as Vibrate } from '@ionic-native/vibration';
+import { CallNumber } from '@ionic-native/call-number';
+import { SMS } from '@ionic-native/sms';
+import { EmailComposer } from '@ionic-native/email-composer';
+import { AppVersion } from '@ionic-native/app-version';
 import { Contacts } from '../classes/contacts';
 import { Parser } from '../classes/parser';
 import { Speech } from '../classes/speech';
@@ -22,11 +26,14 @@ import { Global } from '../classes/global';
 import { Alert } from '../classes/alert';
 import { Vibration } from '../classes/vibration';
 import { Toast } from '../classes/toast';
+import { Action } from '../classes/action';
+import { Send } from '../classes/send';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { ArigatobuttonComponent } from '../components/arigatobutton/arigatobutton';
 import { EditablecardComponent } from '../components/editablecard/editablecard';
 import { LivecardComponent } from '../components/livecard/livecard';
+import { AvatarComponent } from '../components/avatar/avatar';
 var AppModule = (function () {
     function AppModule() {
     }
@@ -39,7 +46,8 @@ AppModule = __decorate([
             HomePage,
             ArigatobuttonComponent,
             EditablecardComponent,
-            LivecardComponent
+            LivecardComponent,
+            AvatarComponent
         ],
         imports: [
             BrowserModule,
@@ -59,6 +67,10 @@ AppModule = __decorate([
             CameraClass,
             Camera,
             Vibrate,
+            CallNumber,
+            SMS,
+            EmailComposer,
+            AppVersion,
             Contacts,
             Parser,
             Speech,
@@ -66,6 +78,8 @@ AppModule = __decorate([
             Alert,
             Vibration,
             Toast,
+            Action,
+            Send,
             { provide: ErrorHandler, useClass: IonicErrorHandler }
         ]
     })
