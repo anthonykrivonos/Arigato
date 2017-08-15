@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 
-import { Observable } from 'rxJS';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class Global {

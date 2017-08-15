@@ -5,112 +5,127 @@ import { parser as human } from 'humanparser';
 
 @Injectable()
 export class Parser {
-      constructor() {}
+	constructor() {}
 
-      parse(text:string, contact:any = null):any {
-            console.log("parser:Starting parse: " + text);
+	parse(text:string, contact:any = null):any {
+		console.log("parser:Starting parse: " + text);
 
-            contact = contact || {};
+		contact = contact || {};
 
-            text = text.replace(/-/g, '') || null;
+		text = text.replace(/-/g, '') || null;
+		console.log("parser:Removed dashes: " + text);
 
-            console.log("parser:Removed dashes: " + text);
+		var phoneNumber = this.getPhoneNumber(text);
+		text = this.rebuildTextWithout(phoneNumber, text);
+		console.log("parser:Got phone number: " + phoneNumber);
 
-            var phoneNumber = this.getPhoneNumber(text);
-            text = text.replace(phoneNumber, '');
+		var emailAddress = this.getEmail(text);
+		text = this.rebuildTextWithout(emailAddress, text);
+		console.log("parser:Got email address: " + emailAddress);
 
-            console.log("parser:Got phone number: " + phoneNumber);
+		var fullNameObj = this.getName(text);
+		text = this.rebuildTextWithout(fullNameObj, text);
+		console.log("parser:Got full name: " + JSON.stringify(fullNameObj));
 
-            var emailAddress = this.getEmail(text);
-            text = text.replace(emailAddress, '');
+		var companyName = this.getCompany(text);
+		text = this.rebuildTextWithout(companyName, text);
+		console.log("parser:Got company name: " + companyName);
 
-            console.log("parser:Got email address: " + emailAddress);
+		console.log((text.length === 0) ? 'Notes empty' : text);
 
-            var fullNameObj = this.getName(text);
-            text = text.replace(fullNameObj ? fullNameObj.fullName : '', '');
+		var parsedContact = {
+			first_name: contact.first_name || fullNameObj ? fullNameObj.firstName : null,
+			last_name: contact.last_name || fullNameObj ? fullNameObj.lastName : null,
+			picture: contact.picture || null,
+			company: contact.company || companyName || null,
+			email: contact.email || emailAddress || null,
+			phone: contact.phone || this.formatNumber(phoneNumber) || null,
+			notes: contact.notes || text || null
+		};
 
-            console.log("parser:Got full name: " + JSON.stringify(fullNameObj));
+		return parsedContact;
+	}
 
-            var companyName = this.getCompany(text);
-            text = text.replace(companyName, '');
+	getPhoneNumber(text:string):string {
+		try {
+			var numbers = text.match(/\d+/g);
 
-            console.log("parser:Got company name: " + companyName);
+			if (numbers == null) return null;
 
-            console.log((text.length === 0) ? 'Notes empty' : text);
+			for (var i = 0; i < numbers.length; i++) {
+				if (numbers[i].length === 10) {
+					return numbers[i];
+				}
+			}
+		} catch(e) {};
+		return null;
+	}
 
-            var testContact = {
-                  first_name: contact.first_name || fullNameObj ? fullNameObj.firstName : null,
-                  last_name: contact.last_name || fullNameObj ? fullNameObj.lastName : null,
-                  picture: contact.picture || null,
-                  company: contact.company || companyName || null,
-                  email: contact.email || emailAddress || null,
-                  phone: contact.phone || this.formatNumber(phoneNumber) || null,
-                  notes: contact.notes || text || null
-            };
+	getEmail(text:string):string {
+		try {
+			if (!text.includes('@')) {
+				return null;
+			}
+			var textArr = text.split(' ');
+			var email = null;
+			for (var i = 0; i < textArr.length; i++) {
+				if (textArr[i].includes('@')) {
+					email = textArr[i];
+				}
+			}
+			return (email.includes('.')) ? email : null;
+		} catch(e) {};
+		return null;
+	}
 
-            return testContact;
-      }
+	getName(text:string):any {
+		try {
+			var name = nlp(text).people().out('text');
+			return name != null && name != "" ? human.parseName(name) : null;
+		} catch(e) {};
+		return null;
+	}
 
-      getPhoneNumber(text:string):string {
-            try {
-                  var numbers = text.match(/\d+/g);
+	getCompany(text:string):string {
+		try {
+			var company = nlp(text).topics().data();
+			return company[0].text;
+		} catch(e) {};
+		return null;
+	}
 
-                  if (numbers == null) return null;
+	rebuildTextWithout(toRemove:any, text:string):string {
+		if (toRemove === null) return text;
 
-                  for (var i = 0; i < numbers.length; i++) {
-                        if (numbers[i].length === 10) {
-                              return numbers[i];
-                        }
-                  }
-            } catch(e) {};
-            return null;
-      }
+		var wordsToRemove = [];
 
-      getEmail(text:string):string {
-            try {
-                  if (!text.includes('@')) {
-                        return null;
-                  }
-                  var textArr = text.split(' ');
-                  var email = null;
-                  for (var i = 0; i < textArr.length; i++) {
-                        if (textArr[i].includes('@')) {
-                              email = textArr[i];
-                        }
-                  }
-                  return (email.includes('.')) ? email : null;
-            } catch(e) {};
-            return null;
-      }
+		if (typeof toRemove === 'object') {
+			Object.keys(toRemove).forEach((key) => {
+				wordsToRemove.push(toRemove[key]);
+			});
+		} else {
+			wordsToRemove = toRemove.split(' ');
+		}
 
-      getName(text:string):any {
-            try {
-                  var name = nlp(text).people().out('text');
-                  return name != null && name != "" ? human.parseName(name) : null;
-            } catch(e) {};
-            return null;
-      }
+		for (var i = 0; i < wordsToRemove.length; i++) {
+			text = text.replace(wordsToRemove[i], '');
+		}
 
-      getCompany(text:string):string {
-            try {
-                  var company = nlp(text).topics().data();
-                  return company[0].text;
-            } catch(e) {};
-            return null;
-      }
+		return text.trim();
+	}
 
-      formatNumber(number:string):string {
-            if (number == null) return null;
-            else if (number.indexOf('+1') == 0) number = number.substring(2);
-            else if (number.indexOf('1') == 0) number = number.substring(1);
-            var number2 = (""+number).replace(/\D/g, '');
-            var m = number2.match(/^(\d{3})(\d{3})(\d{4})$/);
-            return (!m) ? null : '(' + m[1] + ') ' + m[2] + '-' + m[3];
-      }
+	formatNumber(number:string):string {
+		if (number == null) return null;
+		else if (number.indexOf('+1') == 0) number = number.substring(2);
+		else if (number.indexOf('1') == 0) number = number.substring(1);
+		var number2 = (""+number).replace(/\D/g, '');
+		var m = number2.match(/^(\d{3})(\d{3})(\d{4})$/);
+		return (!m) ? null : '(' + m[1] + ') ' + m[2] + '-' + m[3];
+	}
 
-      unFormatNumber(number:string):string {
-            var number2 = (""+number).replace(/\D/g, '');
-            var m = number2.match(/^(\d{3})(\d{3})(\d{4})$/);
-            return (!m) ? null : m[1] + m[2] + m[3];
-      }
+	unFormatNumber(number:string):string {
+		var number2 = (""+number).replace(/\D/g, '');
+		var m = number2.match(/^(\d{3})(\d{3})(\d{4})$/);
+		return (!m) ? null : m[1] + m[2] + m[3];
+	}
 }

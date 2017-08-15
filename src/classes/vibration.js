@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 import { Injectable } from '@angular/core';
 import { Vibration as Vibrate } from '@ionic-native/vibration';
-import { Observable } from 'rxJS';
+import { Observable } from 'rxjs';
 var Vibration = (function () {
     function Vibration(vibrate) {
         this.vibrate = vibrate;
@@ -78,8 +78,7 @@ var Vibration = (function () {
 }());
 Vibration = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [typeof (_a = typeof Vibrate !== "undefined" && Vibrate) === "function" && _a || Object])
+    __metadata("design:paramtypes", [Vibrate])
 ], Vibration);
 export { Vibration };
-var _a;
 //# sourceMappingURL=vibration.js.map

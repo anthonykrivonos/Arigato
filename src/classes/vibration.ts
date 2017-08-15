@@ -3,7 +3,7 @@ import { IonicPage, IonicModule } from 'ionic-angular';
 
 import { Vibration as Vibrate} from '@ionic-native/vibration';
 
-import { Observable } from 'rxJS';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class Vibration {
