@@ -44,8 +44,6 @@ var HomePage = (function () {
     }
     HomePage.prototype.ngOnInit = function () {
         var _this = this;
-        var msg = "My name is Jeremy De La Cruz and my number is 347-679-1084 and my email is hi123@gmail.com and I work at Google";
-        alert(JSON.stringify(this.parser.parse(msg), undefined, 2));
         this.resetValues();
         this.isAndroid = this.plt.is('ios') ? false : true;
         Observable.timer(1000).take(1).subscribe(function () {
