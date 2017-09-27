@@ -8,37 +8,38 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 import { Injectable } from '@angular/core';
-import { Camera as CameraClass } from '@ionic-native/camera';
-var Camera = (function () {
-    function Camera(camera) {
-        this.camera = camera;
+import { Clipboard as ClipboardClass } from '@ionic-native/clipboard';
+var Clipboard = (function () {
+    function Clipboard(clipboard) {
+        this.clipboard = clipboard;
     }
-    Camera.prototype.getPicture = function (success, failure) {
+    Clipboard.prototype.copy = function (text, success, failure) {
         if (success === void 0) { success = null; }
         if (failure === void 0) { failure = null; }
-        var options = {
-            quality: 75,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE,
-            allowEdit: true,
-            saveToPhotoAlbum: true
-        };
-        this.camera.getPicture(options).then(function (link) {
+        this.clipboard.copy(text).then(function () {
             if (success)
-                success(link);
-            console.log("camera: Camera got link: " + link + ".");
-        }, function (e) {
+                success();
+        }).catch(function () {
             if (failure)
-                failure(e);
-            console.log("camera: Camera closed or not working.");
-        }).catch();
+                failure();
+        });
     };
-    return Camera;
+    Clipboard.prototype.paste = function (success, failure) {
+        if (success === void 0) { success = null; }
+        if (failure === void 0) { failure = null; }
+        this.clipboard.paste().then(function () {
+            if (success)
+                success();
+        }).catch(function () {
+            if (failure)
+                failure();
+        });
+    };
+    return Clipboard;
 }());
-Camera = __decorate([
+Clipboard = __decorate([
     Injectable(),
-    __metadata("design:paramtypes", [CameraClass])
-], Camera);
-export { Camera };
-//# sourceMappingURL=camera.js.map
+    __metadata("design:paramtypes", [ClipboardClass])
+], Clipboard);
+export { Clipboard };
+//# sourceMappingURL=clipboard.js.map

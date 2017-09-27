@@ -20,6 +20,6 @@ export class Camera {
             }, (e) => {
                   if (failure) failure(e);
                   console.log("camera: Camera closed or not working.");
-            });
+            }).catch();
       }
 }

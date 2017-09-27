@@ -10,12 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 import { Component, Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 import { Vibration } from '../classes/vibration';
+import { Config } from '../classes/config';
 var Alert = (function () {
-    function Alert(alertCtrl, vibration) {
+    function Alert(alertCtrl, vibration, config) {
         this.alertCtrl = alertCtrl;
         this.vibration = vibration;
+        this.config = config;
     }
     Alert.prototype.showAlert = function (title, message, confirmed, cancelled, confirm, cancel) {
+        var _this = this;
         if (confirmed === void 0) { confirmed = null; }
         if (cancelled === void 0) { cancelled = null; }
         if (confirm === void 0) { confirm = 'Confirm'; }
@@ -44,7 +47,10 @@ var Alert = (function () {
             ]
         });
         alert.present();
-        this.vibration.vibrationShort();
+        this.config.get("vibrateOnAlert", function (vibrateOnAlert) {
+            if (vibrateOnAlert)
+                _this.vibration.vibrationShort();
+        });
     };
     return Alert;
 }());
@@ -53,7 +59,7 @@ Alert = __decorate([
     Component({
         providers: [AlertController, Vibration]
     }),
-    __metadata("design:paramtypes", [AlertController, Vibration])
+    __metadata("design:paramtypes", [AlertController, Vibration, Config])
 ], Alert);
 export { Alert };
 //# sourceMappingURL=alert.js.map

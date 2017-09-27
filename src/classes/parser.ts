@@ -1,131 +1,55 @@
 import { Injectable } from '@angular/core';
+import { Http, Headers, RequestOptions, Response } from '@angular/http';
 
-import * as nlp from 'compromise';
-import { parser as human } from 'humanparser';
+import { NativeStorage } from '@ionic-native/native-storage';
 
 @Injectable()
 export class Parser {
-	constructor() {}
+	PARSEGATO_PARSE:string = 'https://parsergato.herokuapp.com/parse';
 
-	parse(text:string, contact:any = null):any {
-		console.log("parser:Starting parse: " + text);
+	constructor(private http:Http) {}
 
-		contact = contact || {};
+	parse(text:string, token:string, contact:any = null, overwrite:any = null):any {
+		let headers = new Headers({'Content-Type': 'application/json', 'x-access-token': token});
+		let options = new RequestOptions({headers});
+		this.http.post(this.PARSEGATO_PARSE, this.textToJSONString(text), options).map((res:Response) => res.json()).take(1).subscribe((res) => {
+			if (res.parsed_text) {
+				return overwrite == true ? this.overwriteContact(res.parsed_text, contact) : this.updateContact(res.parsed_text, contact);
+			} else {
+				return contact;
+			}
+		});
+	}
 
-		text = text.replace(/-/g, '') || null;
-		console.log("parser:Removed dashes: " + text);
+	textToJSONString(text:string):any {
+		return JSON.stringify({
+			text
+		});
+	}
 
-		var phoneNumber = this.getPhoneNumber(text);
-		text = this.rebuildTextWithout(phoneNumber, text);
-		console.log("parser:Got phone number: " + phoneNumber);
-
-		var emailAddress = this.getEmail(text);
-		text = this.rebuildTextWithout(emailAddress, text);
-		console.log("parser:Got email address: " + emailAddress);
-
-		var fullNameObj = this.getName(text);
-		text = this.rebuildTextWithout(fullNameObj, text);
-		console.log("parser:Got full name: " + JSON.stringify(fullNameObj));
-
-		var companyName = this.getCompany(text);
-		text = this.rebuildTextWithout(companyName, text);
-		console.log("parser:Got company name: " + companyName);
-
-		console.log((text.length === 0) ? 'Notes empty' : text);
-
-		var parsedContact = {
-			first_name: contact.first_name || fullNameObj ? fullNameObj.firstName : null,
-			last_name: contact.last_name || fullNameObj ? fullNameObj.lastName : null,
+	overwriteContact(parsedContact:any, contact:any = null) {
+		if (contact == null) return parsedContact;
+		return {
+			first_name: parsedContact.first_name || contact.first_name,
+			last_name: parsedContact.last_name || contact.last_name,
+			company: parsedContact.company || contact.company,
+			email: parsedContact.email || contact.email,
+			phone: parsedContact.phone || contact.phone,
 			picture: contact.picture || null,
-			company: contact.company || companyName || null,
-			email: contact.email || emailAddress || null,
-			phone: contact.phone || this.formatNumber(phoneNumber) || null,
-			notes: contact.notes || text || null
+			notes: parsedContact.notes || contact.notes,
 		};
-
-		return parsedContact;
 	}
 
-	getPhoneNumber(text:string):string {
-		try {
-			var numbers = text.match(/\d+/g);
-
-			if (numbers == null) return null;
-
-			for (var i = 0; i < numbers.length; i++) {
-				if (numbers[i].length === 10) {
-					return numbers[i];
-				}
-			}
-		} catch(e) {};
-		return null;
-	}
-
-	getEmail(text:string):string {
-		try {
-			if (!text.includes('@')) {
-				return null;
-			}
-			var textArr = text.split(' ');
-			var email = null;
-			for (var i = 0; i < textArr.length; i++) {
-				if (textArr[i].includes('@')) {
-					email = textArr[i];
-				}
-			}
-			return (email.includes('.')) ? email : null;
-		} catch(e) {};
-		return null;
-	}
-
-	getName(text:string):any {
-		try {
-			var name = nlp(text).people().out('text');
-			return name != null && name != "" ? human.parseName(name) : null;
-		} catch(e) {};
-		return null;
-	}
-
-	getCompany(text:string):string {
-		try {
-			var company = nlp(text).topics().data();
-			return company[0].text;
-		} catch(e) {};
-		return null;
-	}
-
-	rebuildTextWithout(toRemove:any, text:string):string {
-		if (toRemove === null) return text;
-
-		var wordsToRemove = [];
-
-		if (typeof toRemove === 'object') {
-			Object.keys(toRemove).forEach((key) => {
-				wordsToRemove.push(toRemove[key]);
-			});
-		} else {
-			wordsToRemove = toRemove.split(' ');
-		}
-
-		for (var i = 0; i < wordsToRemove.length; i++) {
-			text = text.replace(wordsToRemove[i], '');
-		}
-
-		return text.trim();
-	}
-
-	formatNumber(number:string):string {
-		if (number == null) return null;
-		else if (number.indexOf('+1') == 0) number = number.substring(2);
-		else if (number.indexOf('1') == 0) number = number.substring(1);
-		var number2 = (""+number).replace(/\D/g, '');
-		var m = number2.match(/^(\d{3})(\d{3})(\d{4})$/);
-		return (!m) ? null : '(' + m[1] + ') ' + m[2] + '-' + m[3];
-	}
-
-	unFormatNumber(number:string):string {
-		var number2 = (""+number).replace(/\D/g, '');
-		var m = number2.match(/^(\d{3})(\d{3})(\d{4})$/);
-		return (!m) ? null : m[1] + m[2] + m[3];
+	updateContact(parsedContact:any, contact:any = null) {
+		if (contact == null) return parsedContact;
+		return {
+			first_name: contact.first_name || parsedContact.first_name,
+			last_name: contact.last_name || parsedContact.last_name,
+			company: contact.company || parsedContact.company,
+			email: contact.email || parsedContact.email,
+			phone: contact.phone || parsedContact.phone,
+			picture: contact.picture || null,
+			notes: contact.notes || parsedContact.notes,
+		};
 	}
 }

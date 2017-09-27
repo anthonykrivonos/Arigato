@@ -11,6 +11,8 @@ export class Global {
             callback ? this.events.subscribe(name, () => callback()) : this.events.publish(name);
       }
 
+      home(option:string, callback:any = null):void {this.event(`home:${option}`, callback);}
+
       button(option:string, callback:any = null):void {this.event(`button:${option}`, callback);}
 
       storage(option:string, callback:any = null):void {this.event(`storage:${option}`, callback);}

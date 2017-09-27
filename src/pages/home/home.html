@@ -4,62 +4,75 @@
                   <ion-card>
                         <ion-list-header>Menu</ion-list-header>
                   </ion-card>
-                  <ion-card>
+                  <ion-card *ngIf="configuration">
                         <ion-list>
                               <ion-list-header>Configure</ion-list-header>
                               <ion-item>
                                     <ion-label>Vibrate on Alert</ion-label>
-                                    <ion-toggle [(ngModel)]="optionVibrate"></ion-toggle>
+                                    <ion-toggle (tap)="saveConfig()" [(ngModel)]="configuration.vibrateOnAlert"></ion-toggle>
                               </ion-item>
                               <ion-item>
                                     <ion-label>Overwrite on Record</ion-label>
-                                    <ion-toggle [(ngModel)]="optionOverwrite"></ion-toggle>
+                                    <ion-toggle (tap)="saveConfig()" [(ngModel)]="configuration.overwriteOnRecord"></ion-toggle>
                               </ion-item>
                               <ion-item>
                                     <ion-label>Save Avatars to Album</ion-label>
-                                    <ion-toggle [(ngModel)]="optionAvatar"></ion-toggle>
+                                    <ion-toggle (tap)="saveConfig()" [(ngModel)]="configuration.saveAvatarsToAlbum"></ion-toggle>
                               </ion-item>
                         </ion-list>
                   </ion-card>
-                  <ion-card>
+                  <ion-card *ngIf="configuration">
                         <ion-list>
                               <ion-list-header>Destructive</ion-list-header>
                               <ion-item>
                                     <ion-label>Clear Contact on Save</ion-label>
-                                    <ion-toggle [(ngModel)]="optionClear"></ion-toggle>
+                                    <ion-toggle (tap)="saveConfig()" [(ngModel)]="configuration.clearContactOnSave"></ion-toggle>
                               </ion-item>
                               <ion-item>
                                     <ion-label>Delete Contact on Add</ion-label>
-                                    <ion-toggle [(ngModel)]="optionDelete"></ion-toggle>
+                                    <ion-toggle (tap)="saveConfig()" [(ngModel)]="configuration.deleteContactOnAdd"></ion-toggle>
                               </ion-item>
                         </ion-list>
                   </ion-card>
-                  <ion-card>
-                        <ion-list radio-group>
+                  <ion-card *ngIf="configuration">
+                        <ion-list [(ngModel)]="configuration.sortBy" radio-group>
                               <ion-list-header>Sort by</ion-list-header>
                               <ion-item>
                                     <ion-label>Date Created</ion-label>
-                                    <ion-radio checked="true" value="sortDate"></ion-radio>
+                                    <ion-radio (tap)="saveConfig();sort(null, 'dateCreated')" value="dateCreated"></ion-radio>
                               </ion-item>
                               <ion-item>
                                     <ion-label>First Name</ion-label>
-                                    <ion-radio value="sortFirstName"></ion-radio>
+                                    <ion-radio (tap)="saveConfig();sort(null, 'firstName')" value="firstName"></ion-radio>
                               </ion-item>
                               <ion-item>
                                     <ion-label>Last Name</ion-label>
-                                    <ion-radio value="sortLastName"></ion-radio>
+                                    <ion-radio (tap)="saveConfig();sort(null, 'lastName')" value="lastName"></ion-radio>
                               </ion-item>
                               <ion-item>
                                     <ion-label>Phone Number</ion-label>
-                                    <ion-radio value="sortPhone"></ion-radio>
+                                    <ion-radio (tap)="saveConfig();sort(null, 'phoneNumber')" value="phoneNumber"></ion-radio>
                               </ion-item>
                               <ion-item>
                                     <ion-label>Email Address</ion-label>
-                                    <ion-radio value="sortEmail"></ion-radio>
+                                    <ion-radio (tap)="saveConfig();sort(null, 'emailAddress')" value="emailAddress"></ion-radio>
+                              </ion-item>
+                        </ion-list>
+                  </ion-card>
+                  <ion-card *ngIf="token">
+                        <ion-list>
+                              <ion-list-header>Development</ion-list-header>
+                              <ion-item>
+                                    <ion-label>{{optionToken ? 'Tap to Copy Token' : 'Show Token'}}</ion-label>
+                                    <ion-toggle [(ngModel)]="optionToken"></ion-toggle>
+                              </ion-item>
+                              <ion-item (tap)="copyToken()" *ngIf="optionToken">
+                                    <ion-textarea rows="5" placeholder="{{token}}" type="text" readonly="true">{{token}}</ion-textarea>
                               </ion-item>
                         </ion-list>
                   </ion-card>
                   <ion-label *ngIf="version" color="primary">{{version}}</ion-label>
+                  <div class="padding"></div>
             </ion-content>
       </ion-slide>
       <ion-slide>

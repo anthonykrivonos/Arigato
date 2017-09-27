@@ -7,12 +7,13 @@ import { Alert } from '../../classes/alert';
 import { Toast } from '../../classes/toast';
 import { Action } from '../../classes/action';
 import { Send } from '../../classes/send';
+import { Config } from '../../classes/config';
 
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'editablecard',
-  providers: [Camera, Contacts, Global, Alert, Toast, Action, Send],
+  providers: [Camera, Contacts, Global, Alert, Toast, Action, Send, Config],
   templateUrl: 'editablecard.html'
 })
 export class EditablecardComponent {
@@ -27,7 +28,7 @@ export class EditablecardComponent {
       @Input('phone') phone:string;
       @Input('notes') notes:string;
 
-      constructor(private camera:Camera, private contacts:Contacts, private global:Global, public alert:Alert, public toast:Toast, public action:Action, public send:Send) {
+      constructor(private camera:Camera, private contacts:Contacts, private global:Global, public alert:Alert, public toast:Toast, public action:Action, public send:Send, public config:Config) {
             this.global.editablecard('close', () => {
                   Observable.timer(500).take(1).subscribe(()=>this.editing = false);
             });
@@ -43,9 +44,14 @@ export class EditablecardComponent {
                   this.toggleEdit();
             }, () => {
                   // Add to Contacts Option
-                  this.contacts.saveContact(contact, () => {
-                        this.toast.showToast(`Saved ${contact.first_name} in contacts.`);
-                        this.delete(false);
+                  this.config.get("saveAvatarsToAlbum", (saveAvatarsToAlbum) => {
+                        if (!saveAvatarsToAlbum) contact.picture = null;
+                        this.contacts.saveContact(contact, () => {
+                              this.toast.showToast(`Saved ${contact.first_name} in contacts.`);
+                              this.config.get("deleteContactOnAdd", (deleteContactOnAdd) => {
+                                    if (deleteContactOnAdd) this.delete(false);
+                              });
+                        });
                   });
             }, () => {
                   // Call Option

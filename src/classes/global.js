@@ -17,6 +17,10 @@ var Global = (function () {
         if (callback === void 0) { callback = null; }
         callback ? this.events.subscribe(name, function () { return callback(); }) : this.events.publish(name);
     };
+    Global.prototype.home = function (option, callback) {
+        if (callback === void 0) { callback = null; }
+        this.event("home:" + option, callback);
+    };
     Global.prototype.button = function (option, callback) {
         if (callback === void 0) { callback = null; }
         this.event("button:" + option, callback);

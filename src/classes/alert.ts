@@ -2,6 +2,7 @@ import { Component, Injectable } from '@angular/core';
 import { AlertController } from 'ionic-angular';
 
 import { Vibration } from '../classes/vibration';
+import { Config } from '../classes/config';
 
 @Injectable()
 @Component({
@@ -9,7 +10,7 @@ import { Vibration } from '../classes/vibration';
 })
 export class Alert {
 
-      constructor(private alertCtrl:AlertController, public vibration:Vibration) {}
+      constructor(private alertCtrl:AlertController, public vibration:Vibration, public config:Config) {}
 
       showAlert(title:string, message:string, confirmed:any = null, cancelled:any = null, confirm:string = 'Confirm', cancel:string = 'Cancel'):void {
             let alert = this.alertCtrl.create({
@@ -34,6 +35,8 @@ export class Alert {
                   ]
             });
             alert.present();
-            this.vibration.vibrationShort();
+            this.config.get("vibrateOnAlert", (vibrateOnAlert) => {
+                  if (vibrateOnAlert) this.vibration.vibrationShort();
+            });
       }
 }

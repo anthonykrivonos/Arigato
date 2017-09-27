@@ -5,10 +5,11 @@ import { Contacts } from '../../classes/contacts';
 import { Global } from '../../classes/global';
 import { Toast } from '../../classes/toast';
 import { Alert } from '../../classes/alert';
+import { Config } from '../../classes/config';
 
 @Component({
   selector: 'livecard',
-  providers: [Camera, Contacts, Global, Toast, Alert],
+  providers: [Camera, Contacts, Global, Toast, Alert, Config],
   templateUrl: 'livecard.html'
 })
 export class LivecardComponent {
@@ -20,7 +21,7 @@ export class LivecardComponent {
       @Input('phone') phone:string;
       @Input('notes') notes:string;
 
-      constructor(private camera:Camera, private contacts:Contacts, private global:Global, public toast:Toast, public alert:Alert) {}
+      constructor(private camera:Camera, private contacts:Contacts, private global:Global, public toast:Toast, public alert:Alert, public config:Config) {}
 
       getPicture():void {
             this.camera.getPicture((picture) => {
@@ -36,7 +37,9 @@ export class LivecardComponent {
                   var contactObj = this.contacts.createContact(null, this.first_name, this.last_name, this.company, this.phone, this.email, this.picture, this.notes);
                   this.contacts.storeContact(contactObj, () => {
                         this.global.storage('save');
-                        this.clear(false);
+                        this.config.get("clearContactOnSave", (clearContactOnSave) => {
+                              if (clearContactOnSave) this.clear(false);
+                        });
                   });
             }
       }

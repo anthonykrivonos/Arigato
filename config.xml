@@ -3,7 +3,7 @@
     <name>Arigato</name>
     <description>Arigato: A speech parser that simplifies contact creation.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Arigato Team</author>
-    <content original-src="index.html" src="http://192.168.1.19:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -84,22 +84,34 @@
     <allow-navigation href="http://169.254.54.65:8100" />
     <allow-navigation href="http://169.254.53.130:8100" />
     <allow-navigation href="http://192.168.1.19:8100" />
+    <allow-navigation href="http://10.60.6.104:8100" />
+    <allow-navigation href="http://10.216.90.211:8100" />
     <engine name="android" spec="^6.2.3" />
-    <engine name="ios" spec="^4.4.0" />
+    <engine name="ios" spec="~4.4.0" />
+    <allow-navigation href="http://169.254.92.144:8100" />
     <plugin name="cordova-plugin-camera" spec="^2.4.1">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
-    <plugin name="cordova-plugin-console" spec="^1.0.5" />
+    <plugin name="cordova-plugin-compat" spec="^1.1.0" />
+    <plugin name="cordova-plugin-console" spec="^1.0.7" />
     <plugin name="cordova-plugin-contacts" spec="^2.3.1">
         <variable name="CONTACTS_USAGE_DESCRIPTION" value=" " />
     </plugin>
-    <plugin name="cordova-plugin-device" spec="^1.1.4" />
+    <plugin name="cordova-plugin-device" spec="^1.1.6" />
     <plugin name="cordova-plugin-nativestorage" spec="^2.2.2" />
     <plugin name="cordova-plugin-speechrecognition" spec="^1.1.2" />
     <plugin name="cordova-plugin-splashscreen" spec="^4.0.3" />
-    <plugin name="cordova-plugin-statusbar" spec="^2.2.2" />
+    <plugin name="cordova-plugin-statusbar" spec="^2.2.3" />
     <plugin name="cordova-plugin-vibration" spec="^2.1.5" />
-    <plugin name="cordova-plugin-whitelist" spec="^1.3.1" />
+    <plugin name="cordova-plugin-whitelist" spec="^1.3.2" />
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
+    <plugin name="mx.ferreyra.callnumber" spec="~0.0.2" />
+    <plugin name="cordova-plugin-email-composer" spec="^0.8.8" />
+    <plugin name="cordova-sms-plugin" spec="^0.1.11" />
+    <plugin name="cordova-plugin-app-version" spec="^0.1.9" />
+    <plugin name="cordova-plugin-uniquedeviceid" spec="^1.3.2" />
+    <allow-navigation href="http://10.216.91.188:8100" />
+    <allow-navigation href="http://192.168.1.164:8100" />
+    <plugin name="cordova-clipboard" spec="^1.0.0" />
 </widget>

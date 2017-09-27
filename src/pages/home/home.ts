@@ -6,6 +6,10 @@ import { Global } from '../../classes/global';
 import { Contacts } from '../../classes/contacts';
 import { Parser } from '../../classes/parser';
 import { Alert } from '../../classes/alert';
+import { Token as TokenClass } from '../../classes/token';
+import { Clipboard } from '../../classes/clipboard';
+import { Toast } from '../../classes/toast';
+import { Config } from '../../classes/config';
 
 import { ArigatobuttonComponent } from '../../components/arigatobutton/arigatobutton';
 
@@ -13,11 +17,15 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'page-home',
-  providers: [Speech, Global, Contacts, Parser, Alert],
+  providers: [Speech, Global, Contacts, Parser, Alert, TokenClass, Clipboard, Toast, Config],
   templateUrl: 'home.html'
 })
 export class HomePage implements OnInit {
       @ViewChild(Slides) slides: Slides;
+
+      MENU_SLIDE:number = 0;
+      LIVE_SLIDE:number = 1;
+      EDIT_SLIDE:number = 2;
 
       first_name:string;
       last_name:string;
@@ -26,19 +34,20 @@ export class HomePage implements OnInit {
       email:string;
       phone:string;
       notes:string;
+      token:string;
+      text:string;
 
       default:boolean = true;
       isAndroid:boolean;
       logger:boolean = true;
       loading:boolean = false;
 
-      text:string;
-
       stored:any;
+      configuration:any;
 
       slide:number = 0;
 
-      constructor(public navCtrl: NavController, private speech:Speech, private plt:Platform, private global:Global, private contacts:Contacts, public parser:Parser, public alert:Alert) {
+      constructor(public navCtrl: NavController, private speech:Speech, private plt:Platform, private global:Global, private contacts:Contacts, public parser:Parser, public alert:Alert, public tokenClass:TokenClass, public clipboard:Clipboard, public toast:Toast, public config:Config) {
             this.global.logger('hide', () => {
                   this.hideLogger();
             });
@@ -51,6 +60,9 @@ export class HomePage implements OnInit {
             this.global.livecard('delete', () => {
                   this.resetValues();
             });
+            this.global.home('sort', (method) => {
+                  this.sort(null, method);
+            });
       }
 
       ngOnInit():void {
@@ -58,6 +70,15 @@ export class HomePage implements OnInit {
             this.isAndroid = this.plt.is('ios') ? false : true;
             Observable.timer(1000).take(1).subscribe(()=> {
                   this.loadContacts(false);
+                  this.tokenClass.getToken((token) => {
+                        this.token = token.token;
+                        console.log(`Got token ${this.token}`);
+                  }, () => {
+                        console.error("Could not get token.");
+                  });
+                  this.config.load((config) => {
+                        this.configuration = config;
+                  });
             });
       }
 
@@ -97,10 +118,12 @@ export class HomePage implements OnInit {
       endSpeech():void {
             this.loading = false;
             this.speech.stopListening(() => {
-                  console.log("Started parse of text " + this.text);
-                  var contactObj = this.parser.parse(this.text, this.unparseContactObj());
-                  console.log("Ended parse " + JSON.stringify(contactObj, null, 2));
-                  this.parseContactObj(contactObj);
+                  this.config.get("overwriteOnRecord", (overwriteOnRecord) => {
+                        console.log("Started parse of text " + this.text);
+                        var contactObj = this.parser.parse(this.text, this.token, this.unparseContactObj(), overwriteOnRecord);
+                        console.log("Ended parse " + JSON.stringify(contactObj, null, 2));
+                        this.parseContactObj(contactObj);
+                  });
             });
       }
 
@@ -140,8 +163,10 @@ export class HomePage implements OnInit {
 
       loadContacts(slide:boolean = true):void {
             this.contacts.getContacts((stored) => {
-                  this.stored = stored;
-                  this.slideTo(slide ? 1 : 0);
+                  this.config.get("sortBy", (sortBy) => {
+                        this.stored = this.sort(stored, sortBy);
+                        this.slideTo(slide ? 1 : 0);
+                  });
             });
       }
 
@@ -150,6 +175,44 @@ export class HomePage implements OnInit {
                   this.contacts.unStoreContacts(()=>{
                         this.stored = [];
                   });
+            });
+      }
+
+      copyToken():void {
+            this.clipboard.copy(this.token, () => {
+                  this.toast.showToast('Token copied to clipboard!');
+            }, () => {
+                  this.toast.showToast('Token not copied to clipboard!');
+            });
+      }
+
+      saveConfig():void {
+            this.config.save(this.configuration);
+      }
+
+      sort(arr:any = null, method:any) {
+            if (arr == null) arr = this.stored ? this.stored : [];
+            var sortProperty;
+            switch (method) {
+                  case "firstName":
+                        sortProperty = "first_name";
+                        break;
+                  case "lastName":
+                        sortProperty = "last_name";
+                        break;
+                  case "phoneNumber":
+                        sortProperty = "phone";
+                        break;
+                  case "emailAddress":
+                        sortProperty = "email";
+                        break;
+                  default:
+                        sortProperty = "id";
+            }
+            return arr.sort((a,b) => {
+                  if (a[sortProperty] < b[sortProperty]) return -1;
+                  else if (a[sortProperty] > b[sortProperty]) return 1;
+                  return 0;
             });
       }
 }

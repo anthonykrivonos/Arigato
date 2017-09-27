@@ -13,13 +13,15 @@ import { Contacts } from '../../classes/contacts';
 import { Global } from '../../classes/global';
 import { Toast } from '../../classes/toast';
 import { Alert } from '../../classes/alert';
+import { Config } from '../../classes/config';
 var LivecardComponent = (function () {
-    function LivecardComponent(camera, contacts, global, toast, alert) {
+    function LivecardComponent(camera, contacts, global, toast, alert, config) {
         this.camera = camera;
         this.contacts = contacts;
         this.global = global;
         this.toast = toast;
         this.alert = alert;
+        this.config = config;
     }
     LivecardComponent.prototype.getPicture = function () {
         var _this = this;
@@ -36,7 +38,10 @@ var LivecardComponent = (function () {
             var contactObj = this.contacts.createContact(null, this.first_name, this.last_name, this.company, this.phone, this.email, this.picture, this.notes);
             this.contacts.storeContact(contactObj, function () {
                 _this.global.storage('save');
-                _this.clear(false);
+                _this.config.get("clearContactOnSave", function (clearContactOnSave) {
+                    if (clearContactOnSave)
+                        _this.clear(false);
+                });
             });
         }
     };
@@ -123,10 +128,10 @@ __decorate([
 LivecardComponent = __decorate([
     Component({
         selector: 'livecard',
-        providers: [Camera, Contacts, Global, Toast, Alert],
+        providers: [Camera, Contacts, Global, Toast, Alert, Config],
         templateUrl: 'livecard.html'
     }),
-    __metadata("design:paramtypes", [Camera, Contacts, Global, Toast, Alert])
+    __metadata("design:paramtypes", [Camera, Contacts, Global, Toast, Alert, Config])
 ], LivecardComponent);
 export { LivecardComponent };
 //# sourceMappingURL=livecard.js.map

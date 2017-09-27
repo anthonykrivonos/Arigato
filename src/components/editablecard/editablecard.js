@@ -15,9 +15,10 @@ import { Alert } from '../../classes/alert';
 import { Toast } from '../../classes/toast';
 import { Action } from '../../classes/action';
 import { Send } from '../../classes/send';
+import { Config } from '../../classes/config';
 import { Observable } from 'rxjs';
 var EditablecardComponent = (function () {
-    function EditablecardComponent(camera, contacts, global, alert, toast, action, send) {
+    function EditablecardComponent(camera, contacts, global, alert, toast, action, send, config) {
         var _this = this;
         this.camera = camera;
         this.contacts = contacts;
@@ -26,6 +27,7 @@ var EditablecardComponent = (function () {
         this.toast = toast;
         this.action = action;
         this.send = send;
+        this.config = config;
         this.editing = false;
         this.global.editablecard('close', function () {
             Observable.timer(500).take(1).subscribe(function () { return _this.editing = false; });
@@ -35,29 +37,30 @@ var EditablecardComponent = (function () {
         var _this = this;
         var contact = this.unparseContactObj();
         this.action.editableCardAction(contact, function () {
-            // Delete Option
             _this.delete();
         }, function () {
-            // Edit Option
             _this.toggleEdit();
         }, function () {
-            // Add to Contacts Option
-            _this.contacts.saveContact(contact, function () {
-                _this.toast.showToast("Saved " + contact.first_name + " in contacts.");
-                _this.delete(false);
+            _this.config.get("saveAvatarsToAlbum", function (saveAvatarsToAlbum) {
+                if (!saveAvatarsToAlbum)
+                    contact.picture = null;
+                _this.contacts.saveContact(contact, function () {
+                    _this.toast.showToast("Saved " + contact.first_name + " in contacts.");
+                    _this.config.get("deleteContactOnAdd", function (deleteContactOnAdd) {
+                        if (deleteContactOnAdd)
+                            _this.delete(false);
+                    });
+                });
             });
         }, function () {
-            // Call Option
             _this.send.call(contact, null, function () {
                 _this.toast.showToast("Could not call " + contact.first_name + ".");
             });
         }, function () {
-            // Text Option
             _this.send.text(contact, null, function () {
                 _this.toast.showToast("Could not text " + contact.first_name + ".");
             });
         }, function () {
-            // Email Option
             _this.send.email(contact, function () {
                 alert("Opened email " + contact.email);
             }, function (e) {
@@ -150,10 +153,10 @@ __decorate([
 EditablecardComponent = __decorate([
     Component({
         selector: 'editablecard',
-        providers: [Camera, Contacts, Global, Alert, Toast, Action, Send],
+        providers: [Camera, Contacts, Global, Alert, Toast, Action, Send, Config],
         templateUrl: 'editablecard.html'
     }),
-    __metadata("design:paramtypes", [Camera, Contacts, Global, Alert, Toast, Action, Send])
+    __metadata("design:paramtypes", [Camera, Contacts, Global, Alert, Toast, Action, Send, Config])
 ], EditablecardComponent);
 export { EditablecardComponent };
 //# sourceMappingURL=editablecard.js.map
