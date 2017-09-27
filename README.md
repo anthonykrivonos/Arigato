@@ -1,27 +1,18 @@
-This is a starter template for [Ionic](http://ionicframework.com/docs/) projects.
+# Arigato
+### By Anthony Krivonos and Jeremy De La Cruz
 
-## How to use this template
+**Cross-platform mobile application that transforms spoken word into contact information that is easily saved onto the user's phone.**
 
-*This template does not work on its own*. The shared files for each starter are found in the [ionic2-app-base repo](https://github.com/ionic-team/ionic2-app-base).
+##Features:
+1. All parsing is done by the **Parsergato** web server. It's currently hosted on *Heroku.com* at `https://herokuapp.parsergato.com/`.
+2. Authentication for the server is **token-based**, and every app initialization will generate a new JSON web token.
+3. Speech recognition is fully integrated for both **iPhone** and **Android**, as well as the ability to add contacts to the phone's memory.
+4. User avatars can be taken using the **built-in camera** and saved in the phone's memory as well.
+5. Contacts are easily **sortable**, **deletable**, and **editable**.
 
-To use this template, either create a new ionic project using the ionic node.js utility, or copy the files from this repository into the [Starter App Base](https://github.com/ionic-team/ionic2-app-base).
 
-### With the Ionic CLI:
-
-Take the name after `ionic2-starter-`, and that is the name of the template to be used when using the `ionic start` command below:
-
-```bash
-$ sudo npm install -g ionic cordova
-$ ionic start myBlank blank
-```
-
-Then, to run it, cd into `myBlank` and run:
-
-```bash
-$ ionic cordova platform add ios
-$ ionic cordova run ios
-```
-
-Substitute ios for android if not on a Mac.
-
-# Ionic-App
+##Download:
+1. Clone this repository.
+2. `cd` to the project folder.
+3. Run `npm run build-ios` to build for iOS and `npm run build-android` to build for Android.
+4. Run `npm run run-ios` to emulate in Xcode and `npm run run-android` to emulate on Android SDK.
